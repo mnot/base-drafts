@@ -5,8 +5,8 @@
 QUIC                                                     M. Thomson, Ed.
 Internet-Draft                                                   Mozilla
 Intended status: Standards Track                          S. Turner, Ed.
-Expires: 24 May 2021                                               sn3rd
-                                                        20 November 2020
+Expires: 10 June 2021                                              sn3rd
+                                                         7 December 2020
 
 
                         Using TLS to Secure QUIC
@@ -42,7 +42,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 May 2021.
+   This Internet-Draft will expire on 10 June 2021.
 
 Copyright Notice
 
@@ -1382,8 +1382,9 @@ Table of Contents
    0-RTT could cause an application at the server to process the data
    multiple times rather than just once.  Additional actions taken by a
    server as a result of processing replayed application data could have
-   unwanted consequences.  A client therefore MUST only use 0-RTT for
-   application data that is permitted by the application that is in use.
+   unwanted consequences.  A client therefore MUST NOT use 0-RTT for
+   application data unless specifically requested by the application
+   that is in use.
 
    An application protocol that uses QUIC MUST include a profile that
    defines acceptable use of 0-RTT; otherwise, 0-RTT can only be used to
@@ -1852,9 +1853,9 @@ Table of Contents
    subject to potential tampering by an attacker.  QUIC provides
    protection against attackers that cannot read packets, but does not
    attempt to provide additional protection against attacks where the
-   attacker can observe and inject packets.  Some forms of tampering -
-   such as modifying the TLS messages themselves - are detectable, but
-   some - such as modifying ACKs - are not.
+   attacker can observe and inject packets.  Some forms of tampering --
+   such as modifying the TLS messages themselves -- are detectable, but
+   some -- such as modifying ACKs -- are not.
 
    For example, an attacker could inject a packet containing an ACK
    frame that makes it appear that a packet had not been received or to
@@ -2188,13 +2189,13 @@ Table of Contents
    [QUIC-RECOVERY]
               Iyengar, J., Ed. and I. Swett, Ed., "QUIC Loss Detection
               and Congestion Control", Work in Progress, Internet-Draft,
-              draft-ietf-quic-recovery, 20 November 2020,
+              draft-ietf-quic-recovery, 7 December 2020,
               <https://tools.ietf.org/html/draft-ietf-quic-recovery>.
 
    [QUIC-TRANSPORT]
               Iyengar, J., Ed. and M. Thomson, Ed., "QUIC: A UDP-Based
               Multiplexed and Secure Transport", Work in Progress,
-              Internet-Draft, draft-ietf-quic-transport, 20 November
+              Internet-Draft, draft-ietf-quic-transport, 7 December
               2020,
               <https://tools.ietf.org/html/draft-ietf-quic-transport>.
 
@@ -2277,7 +2278,7 @@ Table of Contents
    [QUIC-HTTP]
               Bishop, M., Ed., "Hypertext Transfer Protocol Version 3
               (HTTP/3)", Work in Progress, Internet-Draft, draft-ietf-
-              quic-http, 20 November 2020,
+              quic-http, 7 December 2020,
               <https://tools.ietf.org/html/draft-ietf-quic-http>.
 
    [RFC2818]  Rescorla, E., "HTTP Over TLS", RFC 2818,
