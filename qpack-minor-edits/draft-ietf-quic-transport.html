@@ -16,10 +16,10 @@ range of deployment circumstances.  Accompanying documents describe the
 integration of TLS for key negotiation, loss detection, and an exemplary
 congestion control algorithm. 
     " name="description">
-<meta content="xml2rfc 3.3.0" name="generator">
+<meta content="xml2rfc 3.5.0" name="generator">
 <meta content="draft-ietf-quic-transport" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.3.0
+  xml2rfc 3.5.0
     Python 3.8.5
     appdirs 1.4.4
     ConfigArgParse 1.2.3
@@ -828,7 +828,7 @@ address div.right {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Iyengar &amp; Thomson</td>
-<td class="center">Expires 8 June 2021</td>
+<td class="center">Expires 11 June 2021</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -841,12 +841,12 @@ address div.right {
 <dd class="internet-draft">draft-ietf-quic-transport</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2020-12-05" class="published">5 December 2020</time>
+<time datetime="2020-12-08" class="published">8 December 2020</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2021-06-08">8 June 2021</time></dd>
+<dd class="expires"><time datetime="2021-06-11">11 June 2021</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -903,7 +903,7 @@ code and issues list for this draft can be found at
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 8 June 2021.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 11 June 2021.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -3342,7 +3342,7 @@ shows a QUIC packet with the packet type and packet number shown first, followed
 by the frames that are typically contained in those packets. So, for instance
 the first packet is of type Initial, with packet number 0, and contains a CRYPTO
 frame carrying the ClientHello.<a href="#section-7.1-3" class="pilcrow">¶</a></p>
-<p id="section-7.1-4">Multiple QUIC packets - even of different packet types - can be coalesced into
+<p id="section-7.1-4">Multiple QUIC packets -- even of different packet types -- can be coalesced into
 a single UDP datagram; see <a href="#packet-coalesce" class="xref">Section 12.2</a>. As a result, this handshake
 could consist of as few as 4 UDP datagrams, or any number more (subject to
 limits inherent to the protocol, such as congestion control and
@@ -10222,11 +10222,11 @@ specification reference is provided.<a href="#section-22.4-4.4" class="pilcrow">
 <dd class="break"></dd>
 <dt id="QUIC-RECOVERY">[QUIC-RECOVERY]</dt>
         <dd>
-<span class="refAuthor">Iyengar, J., Ed.</span><span class="refAuthor"> and I. Swett, Ed.</span>, <span class="refTitle">"QUIC Loss Detection and Congestion Control"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-quic-recovery</span>, <time datetime="2020-12-05" class="refDate">5 December 2020</time>, <span>&lt;<a href="https://tools.ietf.org/html/draft-ietf-quic-recovery">https://tools.ietf.org/html/draft-ietf-quic-recovery</a>&gt;</span>. </dd>
+<span class="refAuthor">Iyengar, J., Ed.</span><span class="refAuthor"> and I. Swett, Ed.</span>, <span class="refTitle">"QUIC Loss Detection and Congestion Control"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-quic-recovery</span>, <time datetime="2020-12-08" class="refDate">8 December 2020</time>, <span>&lt;<a href="https://tools.ietf.org/html/draft-ietf-quic-recovery">https://tools.ietf.org/html/draft-ietf-quic-recovery</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="QUIC-TLS">[QUIC-TLS]</dt>
         <dd>
-<span class="refAuthor">Thomson, M., Ed.</span><span class="refAuthor"> and S. Turner, Ed.</span>, <span class="refTitle">"Using Transport Layer Security (TLS) to Secure QUIC"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-quic-tls</span>, <time datetime="2020-12-05" class="refDate">5 December 2020</time>, <span>&lt;<a href="https://tools.ietf.org/html/draft-ietf-quic-tls">https://tools.ietf.org/html/draft-ietf-quic-tls</a>&gt;</span>. </dd>
+<span class="refAuthor">Thomson, M., Ed.</span><span class="refAuthor"> and S. Turner, Ed.</span>, <span class="refTitle">"Using Transport Layer Security (TLS) to Secure QUIC"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-quic-tls</span>, <time datetime="2020-12-08" class="refDate">8 December 2020</time>, <span>&lt;<a href="https://tools.ietf.org/html/draft-ietf-quic-tls">https://tools.ietf.org/html/draft-ietf-quic-tls</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC1191">[RFC1191]</dt>
         <dd>
@@ -10329,7 +10329,7 @@ specification reference is provided.<a href="#section-22.4-4.4" class="pilcrow">
 <dd class="break"></dd>
 <dt id="QUIC-INVARIANTS">[QUIC-INVARIANTS]</dt>
         <dd>
-<span class="refAuthor">Thomson, M.</span>, <span class="refTitle">"Version-Independent Properties of QUIC"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-quic-invariants</span>, <time datetime="2020-12-05" class="refDate">5 December 2020</time>, <span>&lt;<a href="https://tools.ietf.org/html/draft-ietf-quic-invariants">https://tools.ietf.org/html/draft-ietf-quic-invariants</a>&gt;</span>. </dd>
+<span class="refAuthor">Thomson, M.</span>, <span class="refTitle">"Version-Independent Properties of QUIC"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-quic-invariants</span>, <time datetime="2020-12-08" class="refDate">8 December 2020</time>, <span>&lt;<a href="https://tools.ietf.org/html/draft-ietf-quic-invariants">https://tools.ietf.org/html/draft-ietf-quic-invariants</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="QUIC-MANAGEABILITY">[QUIC-MANAGEABILITY]</dt>
         <dd>
@@ -10591,8 +10591,8 @@ incurred.<a href="#section-a.4-8" class="pilcrow">¶</a></p>
       <h2 id="name-change-log">
 <a href="#section-appendix.b" class="section-number selfRef">Appendix B. </a><a href="#name-change-log" class="section-name selfRef">Change Log</a>
       </h2>
-<ul class="ulEmpty normal">
-<li class="ulEmpty normal" id="section-appendix.b-1.1">
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-appendix.b-1.1">
           <strong>RFC Editor's Note:</strong> Please remove this section prior to publication of a
 final version of this document.<a href="#section-appendix.b-1.1" class="pilcrow">¶</a>
 </li>

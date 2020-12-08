@@ -5,10 +5,10 @@
 QUIC                                                           C. Krasic
 Internet-Draft                                                   Netflix
 Intended status: Standards Track                               M. Bishop
-Expires: 8 June 2021                                 Akamai Technologies
+Expires: 11 June 2021                                Akamai Technologies
                                                         A. Frindell, Ed.
                                                                 Facebook
-                                                         5 December 2020
+                                                         8 December 2020
 
 
                   QPACK: Header Compression for HTTP/3
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 June 2021.
+   This Internet-Draft will expire on 11 June 2021.
 
 Copyright Notice
 
@@ -775,7 +775,7 @@ Table of Contents
 4.3.1.  Set Dynamic Table Capacity
 
    An encoder informs the decoder of a change to the dynamic table
-   capacity using an instruction that starts with the '001' three-bit
+   capacity using an instruction that starts with the '001' 3-bit
    pattern.  This is followed by the new dynamic table capacity
    represented as an integer with a 5-bit prefix; see Section 4.1.1.
 
@@ -803,7 +803,7 @@ Table of Contents
 
    An encoder adds an entry to the dynamic table where the field name
    matches the field name of an entry stored in the static or the
-   dynamic table using an instruction that starts with the '1' one-bit
+   dynamic table using an instruction that starts with the '1' 1-bit
    pattern.  The second ('T') bit indicates whether the reference is to
    the static or dynamic table.  The 6-bit prefix integer
    (Section 4.1.1) that follows is used to locate the table entry for
@@ -829,7 +829,7 @@ Table of Contents
 
    An encoder adds an entry to the dynamic table where both the field
    name and the field value are represented as string literals using an
-   instruction that starts with the '01' two-bit pattern.
+   instruction that starts with the '01' 2-bit pattern.
 
    This is followed by the name represented as a 6-bit prefix string
    literal, and the value represented as an 8-bit prefix string literal;
@@ -851,7 +851,7 @@ Table of Contents
 4.3.4.  Duplicate
 
    An encoder duplicates an existing entry in the dynamic table using an
-   instruction that starts with the '000' three-bit pattern.  This is
+   instruction that starts with the '000' 3-bit pattern.  This is
    followed by the relative index of the existing entry represented as
    an integer with a 5-bit prefix; see Section 4.1.1.
 
@@ -877,7 +877,7 @@ Table of Contents
 
    After processing an encoded field section whose declared Required
    Insert Count is not zero, the decoder emits a Section Acknowledgement
-   instruction.  The instruction starts with the '1' one-bit pattern,
+   instruction.  The instruction starts with the '1' 1-bit pattern,
    followed by the field section's associated stream ID encoded as a
    7-bit prefix integer; see Section 4.1.1.
 
@@ -904,8 +904,8 @@ Table of Contents
 
    When a stream is reset or reading is abandoned, the decoder emits a
    Stream Cancellation instruction.  The instruction starts with the
-   '01' two-bit pattern, followed by the stream ID of the affected
-   stream encoded as a 6-bit prefix integer.
+   '01' 2-bit pattern, followed by the stream ID of the affected stream
+   encoded as a 6-bit prefix integer.
 
    This instruction is used as described in Section 2.2.2.
 
@@ -918,7 +918,7 @@ Table of Contents
 
 4.4.3.  Insert Count Increment
 
-   The Insert Count Increment instruction starts with the '00' two-bit
+   The Insert Count Increment instruction starts with the '00' 2-bit
    pattern, followed by the Increment encoded as a 6-bit prefix integer.
    This instruction increases the Known Received Count (Section 2.1.4)
    by the value of the Increment parameter.  The decoder should send an
@@ -1089,7 +1089,7 @@ Table of Contents
 
                        Figure 13: Indexed Field Line
 
-   This representation starts with the '1' one-bit pattern, followed by
+   This representation starts with the '1' 1-bit pattern, followed by
    the 'T' bit indicating whether the reference is into the static or
    dynamic table.  The 6-bit prefix integer (Section 4.1.1) that follows
    is used to locate the table entry for the field line.  When T=1, the
@@ -1109,7 +1109,7 @@ Table of Contents
 
              Figure 14: Indexed Field Line with Post-Base Index
 
-   This representation starts with the '0001' four-bit pattern.  This is
+   This representation starts with the '0001' 4-bit pattern.  This is
    followed by the post-base index (Section 3.2.6) of the matching field
    line, represented as an integer with a 4-bit prefix; see
    Section 4.1.1.
@@ -1132,7 +1132,7 @@ Table of Contents
 
              Figure 15: Literal Field Line With Name Reference
 
-   This representation starts with the '01' two-bit pattern.  The
+   This representation starts with the '01' 2-bit pattern.  The
    following bit, 'N', indicates whether an intermediary is permitted to
    add this field line to the dynamic table on subsequent hops.  When
    the 'N' bit is set, the encoded field line MUST always be encoded
@@ -1171,11 +1171,10 @@ Table of Contents
 
         Figure 16: Literal Field Line With Post-Base Name Reference
 
-   This representation starts with the '0000' four-bit pattern.  The
-   fifth bit is the 'N' bit as described in Section 4.5.4.  This is
-   followed by a post-base index of the dynamic table entry
-   (Section 3.2.6) encoded as an integer with a 3-bit prefix; see
-   Section 4.1.1.
+   This representation starts with the '0000' 4-bit pattern.  The fifth
+   bit is the 'N' bit as described in Section 4.5.4.  This is followed
+   by a post-base index of the dynamic table entry (Section 3.2.6)
+   encoded as an integer with a 3-bit prefix; see Section 4.1.1.
 
    Only the field name is taken from the dynamic table entry; the field
    value is encoded as an 8-bit prefix string literal; see
@@ -1199,11 +1198,10 @@ Table of Contents
 
               Figure 17: Literal Field Line With Literal Name
 
-   This representation starts with the '001' three-bit pattern.  The
-   fourth bit is the 'N' bit as described in Section 4.5.4.  The name
-   follows, represented as a 4-bit prefix string literal, then the
-   value, represented as an 8-bit prefix string literal; see
-   Section 4.1.2.
+   This representation starts with the '001' 3-bit pattern.  The fourth
+   bit is the 'N' bit as described in Section 4.5.4.  The name follows,
+   represented as a 4-bit prefix string literal, then the value,
+   represented as an 8-bit prefix string literal; see Section 4.1.2.
 
 5.  Configuration
 
@@ -1533,13 +1531,13 @@ Table of Contents
 
    [HTTP3]    Bishop, M., Ed., "Hypertext Transfer Protocol Version 3
               (HTTP/3)", Work in Progress, Internet-Draft, draft-ietf-
-              quic-http, 5 December 2020,
+              quic-http, 8 December 2020,
               <https://tools.ietf.org/html/draft-ietf-quic-http>.
 
    [QUIC-TRANSPORT]
               Iyengar, J., Ed. and M. Thomson, Ed., "QUIC: A UDP-Based
               Multiplexed and Secure Transport", Work in Progress,
-              Internet-Draft, draft-ietf-quic-transport, 5 December
+              Internet-Draft, draft-ietf-quic-transport, 8 December
               2020,
               <https://tools.ietf.org/html/draft-ietf-quic-transport>.
 

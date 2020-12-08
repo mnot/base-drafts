@@ -5,8 +5,8 @@
 QUIC                                                     J. Iyengar, Ed.
 Internet-Draft                                                    Fastly
 Intended status: Standards Track                           I. Swett, Ed.
-Expires: 8 June 2021                                              Google
-                                                         5 December 2020
+Expires: 11 June 2021                                             Google
+                                                         8 December 2020
 
 
                QUIC Loss Detection and Congestion Control
@@ -43,7 +43,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 June 2021.
+   This Internet-Draft will expire on 11 June 2021.
 
 Copyright Notice
 
@@ -1280,8 +1280,8 @@ Table of Contents
 8.1.  Congestion Signals
 
    Congestion control fundamentally involves the consumption of signals
-   - both loss and ECN codepoints - from unauthenticated entities.  On-
-   path attackers can spoof or alter these signals.  An attacker can
+   -- both loss and ECN codepoints -- from unauthenticated entities.
+   On-path attackers can spoof or alter these signals.  An attacker can
    cause endpoints to reduce their sending rate by dropping packets, or
    alter send rate by changing ECN codepoints.
 
@@ -1329,13 +1329,13 @@ Table of Contents
 
    [QUIC-TLS] Thomson, M., Ed. and S. Turner, Ed., "Using TLS to Secure
               QUIC", Work in Progress, Internet-Draft, draft-ietf-quic-
-              tls, 5 December 2020,
+              tls, 8 December 2020,
               <https://tools.ietf.org/html/draft-ietf-quic-tls>.
 
    [QUIC-TRANSPORT]
               Iyengar, J., Ed. and M. Thomson, Ed., "QUIC: A UDP-Based
               Multiplexed and Secure Transport", Work in Progress,
-              Internet-Draft, draft-ietf-quic-transport, 5 December
+              Internet-Draft, draft-ietf-quic-transport, 8 December
               2020,
               <https://tools.ietf.org/html/draft-ietf-quic-transport>.
 
