@@ -407,11 +407,22 @@ Table of Contents
 
    The "https" scheme associates authority with possession of a
    certificate that the client considers to be trustworthy for the host
-   identified by the authority component of the URL.  If a server
-   presents a certificate and proof that it controls the corresponding
-   private key, then a client will accept a secured TLS session with
-   that server as being authoritative for all origins with the "https"
-   scheme and a host identified in the certificate.
+   identified by the authority component of the URL.
+
+   If a server presents a valid certificate and proof that it controls
+   the corresponding private key, then a client will accept a secured
+   TLS session with that server as being authoritative for all origins
+   with the "https" scheme and a host identified in the certificate.
+   The host must be listed either as the CN field of the certificate
+   subject or as a dNSName in the subjectAltName field of the
+   certificate; see [RFC6125].  For a host that is an IP address, the
+   client MUST verify that the address appears as an iPAddress in the
+   subjectAltName field of the certificate.
+
+   If the hostname or address is not present in the certificate, the
+   client MUST NOT consider the server authoritative for origins
+   containing that hostname or address.  See Section 4.3 of [SEMANTICS]
+   for more detail on authoritative access.
 
    A client MAY attempt access to a resource with an "https" URI by
    resolving the host identifier to an IP address, establishing a QUIC
@@ -500,18 +511,6 @@ Table of Contents
 
    Once a connection exists to a server endpoint, this connection MAY be
    reused for requests with multiple different URI authority components.
-   In general, a server is considered authoritative for all URIs with
-   the "https" scheme for which the hostname in the URI is present in
-   the authenticated certificate provided by the server, either as the
-   CN field of the certificate subject or as a dNSName in the
-   subjectAltName field of the certificate; see [RFC6125].  For a host
-   that is an IP address, the client MUST verify that the address
-   appears as an iPAddress in the subjectAltName field of the
-   certificate.  If the hostname or address is not present in the
-   certificate, the client MUST NOT consider the server authoritative
-   for origins containing that hostname or address.  See Section 4.3 of
-   [SEMANTICS] for more detail on authoritative access.
-
    Clients SHOULD NOT open more than one HTTP/3 connection to a given
    host and port pair, where the host is derived from a URI, a selected
    alternative service ([ALTSVC]), or a configured proxy.  A client MAY
