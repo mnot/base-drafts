@@ -256,12 +256,10 @@ Table of Contents
 4.2.  Monotonically Increasing Packet Numbers
 
    TCP conflates transmission order at the sender with delivery order at
-   the receiver.  This results in retransmissions of the same data
-   carrying the same sequence number, resulting in the retransmission
-   ambiguity problem ([RETRANSMISSION]).  QUIC separates transmission
-   order from delivery order: packet numbers indicate transmission
-   order, and delivery order is determined by the stream offsets in
-   STREAM frames.
+   the receiver, resulting in the retransmission ambiguity problem
+   ([RETRANSMISSION]).  QUIC separates transmission order from delivery
+   order: packet numbers indicate transmission order, and delivery order
+   is determined by the stream offsets in STREAM frames.
 
    QUIC's packet number is strictly increasing within a packet number
    space, and directly encodes transmission order.  A higher packet
