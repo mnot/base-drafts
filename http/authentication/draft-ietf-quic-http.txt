@@ -4,8 +4,8 @@
 
 QUIC                                                      M. Bishop, Ed.
 Internet-Draft                                                    Akamai
-Intended status: Standards Track                         2 December 2020
-Expires: 5 June 2021
+Intended status: Standards Track                         8 December 2020
+Expires: 11 June 2021
 
 
              Hypertext Transfer Protocol Version 3 (HTTP/3)
@@ -45,7 +45,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 June 2021.
+   This Internet-Draft will expire on 11 June 2021.
 
 Copyright Notice
 
@@ -407,19 +407,22 @@ Table of Contents
 
    The "https" scheme associates authority with possession of a
    certificate that the client considers to be trustworthy for the host
-   identified by the authority component of the URL.  If a server
-   presents a certificate and proof that it controls the corresponding
-   private key, then a client will accept a secured TLS session with
-   that server as being authoritative for all origins with the "https"
-   scheme and a host identified in the certificate.  The host must be
-   listed either as the CN field of the certificate subject or as a
-   dNSName in the subjectAltName field of the certificate; see
-   [RFC6125].  For a host that is an IP address, the client MUST verify
-   that the address appears as an iPAddress in the subjectAltName field
-   of the certificate.  If the hostname or address is not present in the
-   certificate, the client MUST NOT consider the server authoritative
-   for origins containing that hostname or address.  See Section 4.3 of
-   [SEMANTICS] for more detail on authoritative access.
+   identified by the authority component of the URL.
+
+   If a server presents a valid certificate and proof that it controls
+   the corresponding private key, then a client will accept a secured
+   TLS session with that server as being authoritative for all origins
+   with the "https" scheme and a host identified in the certificate.
+   The host must be listed either as the CN field of the certificate
+   subject or as a dNSName in the subjectAltName field of the
+   certificate; see [RFC6125].  For a host that is an IP address, the
+   client MUST verify that the address appears as an iPAddress in the
+   subjectAltName field of the certificate.
+
+   If the hostname or address is not present in the certificate, the
+   client MUST NOT consider the server authoritative for origins
+   containing that hostname or address.  See Section 4.3 of [SEMANTICS]
+   for more detail on authoritative access.
 
    A client MAY attempt access to a resource with an "https" URI by
    resolving the host identifier to an IP address, establishing a QUIC
@@ -1663,7 +1666,7 @@ Table of Contents
    connection where resumption information was provided, but MAY opt not
    to store settings in certain cases (e.g., if the session ticket is
    received before the SETTINGS frame).  A client MUST comply with
-   stored settings - or default values, if no values are stored - when
+   stored settings -- or default values, if no values are stored -- when
    attempting 0-RTT.  Once a server has provided new settings, clients
    MUST comply with those values.
 
@@ -2067,8 +2070,8 @@ Table of Contents
    processing resources; see Section 7 of [QPACK] for more details on
    potential abuses.
 
-   All these features - i.e., server push, unknown protocol elements,
-   field compression - have legitimate uses.  These features become a
+   All these features -- i.e., server push, unknown protocol elements,
+   field compression -- have legitimate uses.  These features become a
    burden only when they are used unnecessarily or to excess.
 
    An endpoint that does not monitor this behavior exposes itself to a
@@ -2529,13 +2532,13 @@ Table of Contents
 
    [QPACK]    Krasic, C., Bishop, M., and A. Frindell, Ed., "QPACK:
               Header Compression for HTTP over QUIC", Work in Progress,
-              Internet-Draft, draft-ietf-quic-qpack, 2 December 2020,
+              Internet-Draft, draft-ietf-quic-qpack, 8 December 2020,
               <https://tools.ietf.org/html/draft-ietf-quic-qpack>.
 
    [QUIC-TRANSPORT]
               Iyengar, J., Ed. and M. Thomson, Ed., "QUIC: A UDP-Based
               Multiplexed and Secure Transport", Work in Progress,
-              Internet-Draft, draft-ietf-quic-transport, 2 December
+              Internet-Draft, draft-ietf-quic-transport, 8 December
               2020,
               <https://tools.ietf.org/html/draft-ietf-quic-transport>.
 
