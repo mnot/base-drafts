@@ -173,12 +173,9 @@ Table of Contents
 
 1.  Introduction
 
-   QUIC is a new multiplexed and secure transport protocol atop UDP,
-   specified in [QUIC-TRANSPORT].  This document describes congestion
-   control and loss recovery for QUIC.  Mechanisms described in this
-   document follow the spirit of existing TCP congestion control and
-   loss recovery mechanisms, described in RFCs, various Internet-drafts,
-   or academic papers, and also those prevalent in TCP implementations.
+   QUIC is a secure general-purpose transport protocol, described in
+   [QUIC-TRANSPORT]).  This document describes loss detection and
+   congestion control mechanisms for QUIC.
 
 2.  Conventions and Definitions
 
@@ -197,10 +194,10 @@ Table of Contents
       elicit an ACK from the receiver within the maximum acknowledgement
       delay and are called ack-eliciting packets.
 
-   In-flight:  Packets are considered in-flight when they are ack-
-      eliciting or contain a PADDING frame, and they have been sent but
-      are not acknowledged, declared lost, or discarded along with old
-      keys.
+   In-flight packets:  Packets are considered in-flight when they are
+      ack-eliciting or contain a PADDING frame, and they have been sent
+      but are not acknowledged, declared lost, or discarded along with
+      old keys.
 
 3.  Design of the QUIC Transmission Machinery
 
@@ -259,12 +256,10 @@ Table of Contents
 4.2.  Monotonically Increasing Packet Numbers
 
    TCP conflates transmission order at the sender with delivery order at
-   the receiver, which results in retransmissions of the same data
-   carrying the same sequence number, and consequently leads to
-   "retransmission ambiguity".  QUIC separates the two.  QUIC uses a
-   packet number to indicate transmission order.  Application data is
-   sent in one or more streams and delivery order is determined by
-   stream offsets encoded within STREAM frames.
+   the receiver, resulting in the retransmission ambiguity problem
+   ([RETRANSMISSION]).  QUIC separates transmission order from delivery
+   order: packet numbers indicate transmission order, and delivery order
+   is determined by the stream offsets in STREAM frames.
 
    QUIC's packet number is strictly increasing within a packet number
    space, and directly encodes transmission order.  A higher packet
@@ -1376,6 +1371,11 @@ Table of Contents
               Progress, Internet-Draft, draft-ietf-tcpm-rack-14, 2
               December 2020, <http://www.ietf.org/internet-drafts/draft-
               ietf-tcpm-rack-14.txt>.
+
+   [RETRANSMISSION]
+              Karn, P. and C. Partridge, "Improving Round-Trip Time
+              Estimates in Reliable Transport Protocols", ACM SIGCOMM
+              CCR , January 1995.
 
    [RFC3465]  Allman, M., "TCP Congestion Control with Appropriate Byte
               Counting (ABC)", RFC 3465, DOI 10.17487/RFC3465, February
