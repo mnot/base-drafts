@@ -610,16 +610,16 @@ Table of Contents
 3.2.4.  Absolute Indexing
 
    Each entry possesses an absolute index that is fixed for the lifetime
-   of that entry.  The first entry inserted has an absolute index of
-   "0"; indices increase by one with each insertion.
+   of that entry.  The first entry inserted has an absolute index of 0;
+   indices increase by one with each insertion.
 
 3.2.5.  Relative Indexing
 
    Relative indices begin at zero and increase in the opposite direction
    from the absolute index.  Determining which entry has a relative
-   index of "0" depends on the context of the reference.
+   index of 0 depends on the context of the reference.
 
-   In encoder instructions (Section 4.3), a relative index of "0" refers
+   In encoder instructions (Section 4.3), a relative index of 0 refers
    to the most recently inserted value in the dynamic table.  Note that
    this means the entry referenced by a given relative index will change
    while interpreting instructions on the encoder stream.
@@ -644,7 +644,7 @@ Table of Contents
    references are stable even if encoded field sections and dynamic
    table updates are processed out of order.
 
-   In a field line representation, a relative index of "0" refers to the
+   In a field line representation, a relative index of 0 refers to the
    entry with absolute index equal to Base - 1.
 
                   Base
@@ -745,6 +745,7 @@ Table of Contents
    MUST initiate at most one encoder stream and at most one decoder
    stream.  Receipt of a second instance of either stream type MUST be
    treated as a connection error of type H3_STREAM_CREATION_ERROR.
+
    These streams MUST NOT be closed.  Closure of either unidirectional
    stream type MUST be treated as a connection error of type
    H3_CLOSED_CRITICAL_STREAM.
@@ -774,7 +775,7 @@ Table of Contents
 4.3.1.  Set Dynamic Table Capacity
 
    An encoder informs the decoder of a change to the dynamic table
-   capacity using an instruction that begins with the '001' three-bit
+   capacity using an instruction that starts with the '001' 3-bit
    pattern.  This is followed by the new dynamic table capacity
    represented as an integer with a 5-bit prefix; see Section 4.1.1.
 
@@ -802,7 +803,7 @@ Table of Contents
 
    An encoder adds an entry to the dynamic table where the field name
    matches the field name of an entry stored in the static or the
-   dynamic table using an instruction that starts with the '1' one-bit
+   dynamic table using an instruction that starts with the '1' 1-bit
    pattern.  The second ('T') bit indicates whether the reference is to
    the static or dynamic table.  The 6-bit prefix integer
    (Section 4.1.1) that follows is used to locate the table entry for
@@ -828,7 +829,7 @@ Table of Contents
 
    An encoder adds an entry to the dynamic table where both the field
    name and the field value are represented as string literals using an
-   instruction that starts with the '01' two-bit pattern.
+   instruction that starts with the '01' 2-bit pattern.
 
    This is followed by the name represented as a 6-bit prefix string
    literal, and the value represented as an 8-bit prefix string literal;
@@ -850,7 +851,7 @@ Table of Contents
 4.3.4.  Duplicate
 
    An encoder duplicates an existing entry in the dynamic table using an
-   instruction that begins with the '000' three-bit pattern.  This is
+   instruction that starts with the '000' 3-bit pattern.  This is
    followed by the relative index of the existing entry represented as
    an integer with a 5-bit prefix; see Section 4.1.1.
 
@@ -876,7 +877,7 @@ Table of Contents
 
    After processing an encoded field section whose declared Required
    Insert Count is not zero, the decoder emits a Section Acknowledgement
-   instruction.  The instruction begins with the '1' one-bit pattern,
+   instruction.  The instruction starts with the '1' 1-bit pattern,
    followed by the field section's associated stream ID encoded as a
    7-bit prefix integer; see Section 4.1.1.
 
@@ -902,9 +903,9 @@ Table of Contents
 4.4.2.  Stream Cancellation
 
    When a stream is reset or reading is abandoned, the decoder emits a
-   Stream Cancellation instruction.  The instruction begins with the
-   '01' two-bit pattern, followed by the stream ID of the affected
-   stream encoded as a 6-bit prefix integer.
+   Stream Cancellation instruction.  The instruction starts with the
+   '01' 2-bit pattern, followed by the stream ID of the affected stream
+   encoded as a 6-bit prefix integer.
 
    This instruction is used as described in Section 2.2.2.
 
@@ -917,7 +918,7 @@ Table of Contents
 
 4.4.3.  Insert Count Increment
 
-   The Insert Count Increment instruction begins with the '00' two-bit
+   The Insert Count Increment instruction starts with the '00' 2-bit
    pattern, followed by the Increment encoded as a 6-bit prefix integer.
    This instruction increases the Known Received Count (Section 2.1.4)
    by the value of the Increment parameter.  The decoder should send an
@@ -1131,7 +1132,7 @@ Table of Contents
 
              Figure 15: Literal Field Line With Name Reference
 
-   This representation starts with the '01' two-bit pattern.  The
+   This representation starts with the '01' 2-bit pattern.  The
    following bit, 'N', indicates whether an intermediary is permitted to
    add this field line to the dynamic table on subsequent hops.  When
    the 'N' bit is set, the encoded field line MUST always be encoded
@@ -1170,11 +1171,10 @@ Table of Contents
 
         Figure 16: Literal Field Line With Post-Base Name Reference
 
-   This representation starts with the '0000' four-bit pattern.  The
-   fifth bit is the 'N' bit as described in Section 4.5.4.  This is
-   followed by a post-base index of the dynamic table entry
-   (Section 3.2.6) encoded as an integer with a 3-bit prefix; see
-   Section 4.1.1.
+   This representation starts with the '0000' 4-bit pattern.  The fifth
+   bit is the 'N' bit as described in Section 4.5.4.  This is followed
+   by a post-base index of the dynamic table entry (Section 3.2.6)
+   encoded as an integer with a 3-bit prefix; see Section 4.1.1.
 
    Only the field name is taken from the dynamic table entry; the field
    value is encoded as an 8-bit prefix string literal; see
@@ -1198,11 +1198,10 @@ Table of Contents
 
               Figure 17: Literal Field Line With Literal Name
 
-   This representation begins with the '001' three-bit pattern.  The
-   fourth bit is the 'N' bit as described in Section 4.5.4.  The name
-   follows, represented as a 4-bit prefix string literal, then the
-   value, represented as an 8-bit prefix string literal; see
-   Section 4.1.2.
+   This representation starts with the '001' 3-bit pattern.  The fourth
+   bit is the 'N' bit as described in Section 4.5.4.  The name follows,
+   represented as a 4-bit prefix string literal, then the value,
+   represented as an 8-bit prefix string literal; see Section 4.1.2.
 
 5.  Configuration
 
