@@ -2320,9 +2320,6 @@ Table of Contents
    MUST NOT be assigned by IANA and MUST NOT appear in the listing of
    assigned values.
 
-   The previous paragraph will be included as a note on the IANA
-   registry page.
-
 11.2.2.  Settings Parameters
 
    This document establishes a registry for HTTP/3 settings.  The
@@ -2371,9 +2368,6 @@ Table of Contents
    values of N (that is, 0x21, 0x40, ..., through 0x3ffffffffffffffe)
    MUST NOT be assigned by IANA and MUST NOT appear in the listing of
    assigned values.
-
-   The previous paragraph will be included as a note on the IANA
-   registry page.
 
 11.2.3.  Error Codes
 
@@ -2483,9 +2477,6 @@ Table of Contents
    MUST NOT be assigned by IANA and MUST NOT appear in the listing of
    assigned values.
 
-   The previous paragraph will be included as a note on the IANA
-   registry page.
-
 11.2.4.  Stream Types
 
    This document establishes a registry for HTTP/3 unidirectional stream
@@ -2525,9 +2516,6 @@ Table of Contents
    values of N (that is, 0x21, 0x40, ..., through 0x3ffffffffffffffe)
    MUST NOT be assigned by IANA and MUST NOT appear in the listing of
    assigned values.
-
-   The previous paragraph will be included as a note on the IANA
-   registry page.
 
 12.  References
 
