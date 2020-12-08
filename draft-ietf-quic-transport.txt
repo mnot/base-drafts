@@ -236,7 +236,8 @@ Table of Contents
        21.5.2.  Request Forgery with Client Initial Packets
        21.5.3.  Request Forgery with Preferred Addresses
        21.5.4.  Request Forgery with Spoofed Migration
-       21.5.5.  Generic Request Forgery Countermeasures
+       21.5.5.  Request Forgery with Version Negotiation
+       21.5.6.  Generic Request Forgery Countermeasures
      21.6.  Slowloris Attacks
      21.7.  Stream Fragmentation and Reassembly Attacks
      21.8.  Stream Commitment Attack
@@ -7315,15 +7316,18 @@ Table of Contents
       populating DNS records;
 
    *  preferred addresses (Section 9.6), where a server is able to
-      choose where a client sends datagrams; and
+      choose where a client sends datagrams;
 
    *  spoofed connection migrations (Section 9.3.1), where a client is
       able to use source address spoofing to select where a server sends
-      subsequent datagrams.
+      subsequent datagrams; and
 
-   In all three cases, the attacker can cause its peer to send datagrams
-   to a victim that might not understand QUIC.  That is, these packets
-   are sent by the peer prior to address validation; see Section 8.
+   *  spoofed packets that cause a server to send a Version Negotiation
+      packet Section 21.5.5.
+
+   In all cases, the attacker can cause its peer to send datagrams to a
+   victim that might not understand QUIC.  That is, these packets are
+   sent by the peer prior to address validation; see Section 8.
 
    Outside of the encrypted portion of packets, QUIC offers an endpoint
    several options for controlling the content of UDP datagrams that its
@@ -7405,7 +7409,7 @@ Table of Contents
 
    This document does not offer any additional countermeasures that are
    specific to use of preferred addresses and can be implemented by
-   endpoints.  The generic measures described in Section 21.5.5 could be
+   endpoints.  The generic measures described in Section 21.5.6 could be
    used as further mitigation.
 
 21.5.4.  Request Forgery with Spoofed Migration
@@ -7428,12 +7432,29 @@ Table of Contents
 
    This document does not offer specific countermeasures that can be
    implemented by endpoints aside from the generic measures described in
-   Section 21.5.5.  However, countermeasures for address spoofing at the
+   Section 21.5.6.  However, countermeasures for address spoofing at the
    network level, in particular ingress filtering [BCP38], are
    especially effective against attacks that use spoofing and originate
    from an external network.
 
-21.5.5.  Generic Request Forgery Countermeasures
+21.5.5.  Request Forgery with Version Negotiation
+
+   Clients that are able to present a spoofed source address on a packet
+   can cause a server to send a Version Negotiation packet
+   Section 17.2.1 to that address.
+
+   The absence of size restrictions on the connection ID fields for
+   packets of an unknown version increases the amount of data that the
+   client controls from the resulting datagram.  The first byte of this
+   packet is not under client control and the next four bytes are zero,
+   but the client is able to control up to 512 bytes starting from the
+   fifth byte.
+
+   No specific countermeasures are provided for this attack, though
+   generic protections Section 21.5.6 could apply.  In this case,
+   ingress filtering [BCP38] is also effective.
+
+21.5.6.  Generic Request Forgery Countermeasures
 
    The most effective defense against request forgery attacks is to
    modify vulnerable services to use strong authentication.  However,
