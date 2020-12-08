@@ -1218,9 +1218,9 @@ Table of Contents
    selected cipher suite; see Section 5.4.3 and Section 5.4.4.
 
    Figure 7 shows an example long header packet (Initial) and a short
-   header packet.  Figure 7 shows the fields in each header that are
-   covered by header protection and the portion of the protected packet
-   payload that is sampled.
+   header packet (1-RTT).  Figure 7 shows the fields in each header that
+   are covered by header protection and the portion of the protected
+   packet payload that is sampled.
 
    Initial Packet {
      Header Form (1) = 1,
@@ -1242,7 +1242,7 @@ Table of Contents
      Protected Payload (..)     # Remainder
    }
 
-   Short Header Packet {
+   1-RTT Packet {
      Header Form (1) = 0,
      Fixed Bit (1) = 1,
      Spin Bit (1),
