@@ -2239,11 +2239,16 @@ Table of Contents
    that packet, the attacker can use the server to send more data toward
    the victim than it would be able to send on its own.
 
-   The primary defense against amplification attack is verifying that an
-   endpoint is able to receive packets at the transport address that it
-   claims.  Address validation is performed both during connection
-   establishment (see Section 8.1) and during connection migration (see
-   Section 8.2).
+   The primary defense against amplification attacks is verifying that a
+   peer is able to receive packets at the transport address that it
+   claims.  Therefore, after receiving packets from an address that is
+   not yet validated, an endpoint MUST limit the amount of data it sends
+   to the unvalidated address to three times the amount of data received
+   from that address.  This limit on the size of responses is known as
+   the anti-amplification limit.
+
+   Address validation is performed both during connection establishment
+   (see Section 8.1) and during connection migration (see Section 8.2).
 
 8.1.  Address Validation During Connection Establishment
 
@@ -2497,9 +2502,9 @@ Table of Contents
    when the token was issued.  Servers can use tokens from NEW_TOKEN in
    deciding not to send a Retry packet, even if the client address has
    changed.  If the client IP address has changed, the server MUST
-   adhere to the anti-amplification limits found in Section 8.1.  Note
-   that in the presence of NAT, this requirement might be insufficient
-   to protect other hosts that share the NAT from amplification attack.
+   adhere to the anti-amplification limit; see Section 8.  Note that in
+   the presence of NAT, this requirement might be insufficient to
+   protect other hosts that share the NAT from amplification attack.
 
    Attackers could replay tokens to use servers as amplifiers in DDoS
    attacks.  To protect against such attacks, servers MUST ensure that
@@ -2582,9 +2587,25 @@ Table of Contents
    corresponding PATH_CHALLENGE.
 
    An endpoint MUST expand datagrams that contain a PATH_CHALLENGE frame
-   to at least the smallest allowed maximum datagram size of 1200 bytes.
-   Sending UDP datagrams of this size ensures that the network path from
-   the endpoint to the peer can be used for QUIC; see Section 14.
+   to at least the smallest allowed maximum datagram size of 1200 bytes,
+   unless the anti-amplification limit for the path does not permit
+   sending a datagram of this size.  Sending UDP datagrams of this size
+   ensures that the network path from the endpoint to the peer can be
+   used for QUIC; see Section 14.
+
+   When an endpoint is unable to expand the datagram size to 1200 bytes
+   due to the anti-amplification limit, the path MTU will not be
+   validated.  To ensure that the path MTU is large enough, the endpoint
+   MUST perform a second path validation by sending a PATH_CHALLENGE
+   frame in a datagram of at least 1200 bytes.  This additional
+   validation can be performed after a PATH_RESPONSE is successfully
+   received or when enough bytes have been received on the path that
+   sending the larger datagram will not result in exceeding the anti-
+   amplification limit.
+
+   Unlike other cases where datagrams are expanded, endpoints MUST NOT
+   discard datagrams that appear to be too small when they contain
+   PATH_CHALLENGE or PATH_RESPONSE.
 
 8.2.2.  Path Validation Responses
 
@@ -2604,7 +2625,10 @@ Table of Contents
    An endpoint MUST expand datagrams that contain a PATH_RESPONSE frame
    to at least the smallest allowed maximum datagram size of 1200 bytes.
    This verifies that the path is able to carry datagrams of this size
-   in both directions.
+   in both directions.  However, an endpoint MUST NOT expand the
+   datagram containing the PATH_RESPONSE if the resulting data exceeds
+   the anti-amplification limit.  This is expected to only occur if the
+   received PATH_CHALLENGE was not sent in an expanded datagram.
 
    An endpoint MUST NOT send more than one PATH_RESPONSE frame in
    response to one PATH_CHALLENGE frame; see Section 13.3.  The peer is
@@ -2617,6 +2641,14 @@ Table of Contents
    contains the data that was sent in a previous PATH_CHALLENGE frame.
    A PATH_RESPONSE frame received on any network path validates the path
    on which the PATH_CHALLENGE was sent.
+
+   If the PATH_CHALLENGE frame that resulted in successful path
+   validation was sent in a datagram that was not expanded to at least
+   1200 bytes, the endpoint can regard the address as valid.  The
+   endpoint is then able to send more than three times the amount of
+   data that has been received.  However, the endpoint MUST initiate
+   another path validation with an expanded datagram to verify that the
+   path supports required MTU.
 
    Receipt of an acknowledgment for a packet containing a PATH_CHALLENGE
    frame is not adequate validation, since the acknowledgment can be
@@ -2646,7 +2678,11 @@ Table of Contents
    path is unusable.  This does not necessarily imply a failure of the
    connection - endpoints can continue sending packets over other paths
    as appropriate.  If no paths are available, an endpoint can wait for
-   a new path to become available or close the connection.
+   a new path to become available or close the connection.  An endpoint
+   that has no valid network path to its peer MAY signal this using the
+   NO_VIABLE_PATH connection error, noting that this is only possible if
+   the network path exists but does not support the required MTU
+   (Section 14).
 
    A path validation might be abandoned for other reasons besides
    failure.  Primarily, this happens if a connection migration to a new
@@ -2777,15 +2813,10 @@ Table of Contents
 
    As described in Section 9.3, an endpoint is required to validate a
    peer's new address to confirm the peer's possession of the new
-   address.  Until a peer's address is deemed valid, an endpoint MUST
-   limit the rate at which it sends data to this address.  The endpoint
-   MUST NOT send more than a minimum congestion window's worth of data
-   per estimated round-trip time (kMinimumWindow, as defined in
-   [QUIC-RECOVERY]).  In the absence of this limit, an endpoint risks
-   being used for a denial of service attack against an unsuspecting
-   victim.  Note that since the endpoint will not have any round-trip
-   time measurements to this address, the estimate SHOULD be the default
-   initial value; see [QUIC-RECOVERY].
+   address.  Until a peer's address is deemed valid, an endpoint limits
+   the amount of data it sends to that address; see Section 8.  In the
+   absence of this limit, an endpoint risks being used for a denial of
+   service attack against an unsuspecting victim.
 
    If an endpoint skips validation of a peer address as described above,
    it does not need to limit its sending rate.
@@ -3067,9 +3098,8 @@ Table of Contents
    preferred address.
 
    Servers SHOULD initiate path validation to the client's new address
-   upon receiving a probe packet from a different address.  Servers MUST
-   NOT send more than a minimum congestion window's worth of non-probing
-   packets to the new address before path validation is complete.
+   upon receiving a probe packet from a different address; see
+   Section 8.
 
    A client that migrates to a new address SHOULD use a preferred
    address from the same address family for the server.
@@ -6808,6 +6838,11 @@ Table of Contents
       confidentiality or integrity limit for the AEAD algorithm used by
       the given connection.
 
+   NO_VIABLE_PATH (0x10):  An endpoint has determined that the network
+      path is incapable of supporting QUIC.  An endpoint is unlikely to
+      receive CONNECTION_CLOSE carrying this code except when the path
+      does not support a large enough MTU.
+
    CRYPTO_ERROR (0x1XX):  The cryptographic handshake failed.  A range
       of 256 values is reserved for carrying error codes specific to the
       cryptographic handshake that is used.  Codes for errors occurring
@@ -6897,10 +6932,15 @@ Table of Contents
    Address validation limits amplification attack targets to addresses
    for which an attacker can observe packets.
 
-   Prior to validation, endpoints are limited in what they are able to
-   send.  During the handshake, a server cannot send more than three
-   times the data it receives; clients that initiate new connections or
-   migrate to a new network path are limited.
+   Prior to address validation, endpoints are limited in what they are
+   able to send.  Endpoints cannot send data toward an unvalidated
+   address in excess of three times the data received from that address.
+
+   Note:  The anti-amplification limit only applies when an endpoint
+      responds to packets received from an unvalidated address.  The
+      anti-amplification limit does not apply to clients when
+      establishing a new connection or when initiating connection
+      migration.
 
 21.1.1.2.  Server-Side DoS
 
@@ -8009,6 +8049,10 @@ Table of Contents
    |0xf   | AEAD_LIMIT_REACHED        |Excessive use of| Section 20    |
    |      |                           |packet          |               |
    |      |                           |protection keys |               |
+   +------+---------------------------+----------------+---------------+
+   |0x10  | NO_VIABLE_PATH            |No viable       | Section 20    |
+   |      |                           |network path    |               |
+   |      |                           |exists          |               |
    +------+---------------------------+----------------+---------------+
 
             Table 7: Initial QUIC Transport Error Codes Entries

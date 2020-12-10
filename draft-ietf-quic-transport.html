@@ -3753,11 +3753,15 @@ spoofed source address information that identifies a victim.  If a server
 generates more or larger packets in response to that packet, the attacker can
 use the server to send more data toward the victim than it would be able to send
 on its own.<a href="#section-8-1" class="pilcrow">¶</a></p>
-<p id="section-8-2">The primary defense against amplification attack is verifying that an endpoint
-is able to receive packets at the transport address that it claims.  Address
-validation is performed both during connection establishment (see
+<p id="section-8-2">The primary defense against amplification attacks is verifying that a peer is
+able to receive packets at the transport address that it claims.  Therefore,
+after receiving packets from an address that is not yet validated, an endpoint
+MUST limit the amount of data it sends to the unvalidated address to three times
+the amount of data received from that address.  This limit on the size of
+responses is known as the anti-amplification limit.<a href="#section-8-2" class="pilcrow">¶</a></p>
+<p id="section-8-3">Address validation is performed both during connection establishment (see
 <a href="#validate-handshake" class="xref">Section 8.1</a>) and during connection migration (see
-<a href="#migrate-validate" class="xref">Section 8.2</a>).<a href="#section-8-2" class="pilcrow">¶</a></p>
+<a href="#migrate-validate" class="xref">Section 8.2</a>).<a href="#section-8-3" class="pilcrow">¶</a></p>
 <div id="validate-handshake">
 <section id="section-8.1">
         <h3 id="name-address-validation-during-c">
@@ -3989,8 +3993,8 @@ address and port in client packets remain constant.<a href="#section-8.1.4-3" cl
 to verify that the client IP address has not changed from when the token was
 issued. Servers can use tokens from NEW_TOKEN in deciding not to send a Retry
 packet, even if the client address has changed. If the client IP address has
-changed, the server MUST adhere to the anti-amplification limits found in
-<a href="#validate-handshake" class="xref">Section 8.1</a>.  Note that in the presence of NAT, this requirement
+changed, the server MUST adhere to the anti-amplification limit; see
+<a href="#address-validation" class="xref">Section 8</a>.  Note that in the presence of NAT, this requirement
 might be insufficient to protect other hosts that share the NAT from
 amplification attack.<a href="#section-8.1.4-4" class="pilcrow">¶</a></p>
 <p id="section-8.1.4-5">Attackers could replay tokens to use servers as amplifiers in DDoS attacks. To
@@ -4064,9 +4068,20 @@ connection.<a href="#section-8.2.1-3" class="pilcrow">¶</a></p>
 <p id="section-8.2.1-4">The endpoint MUST use unpredictable data in every PATH_CHALLENGE frame so that
 it can associate the peer's response with the corresponding PATH_CHALLENGE.<a href="#section-8.2.1-4" class="pilcrow">¶</a></p>
 <p id="section-8.2.1-5">An endpoint MUST expand datagrams that contain a PATH_CHALLENGE frame to at
-least the smallest allowed maximum datagram size of 1200 bytes.  Sending UDP
-datagrams of this size ensures that the network path from the endpoint to the
-peer can be used for QUIC; see <a href="#datagram-size" class="xref">Section 14</a>.<a href="#section-8.2.1-5" class="pilcrow">¶</a></p>
+least the smallest allowed maximum datagram size of 1200 bytes, unless the
+anti-amplification limit for the path does not permit sending a datagram of
+this size.  Sending UDP datagrams of this size ensures that the network path
+from the endpoint to the peer can be used for QUIC; see <a href="#datagram-size" class="xref">Section 14</a>.<a href="#section-8.2.1-5" class="pilcrow">¶</a></p>
+<p id="section-8.2.1-6">When an endpoint is unable to expand the datagram size to 1200 bytes due to the
+anti-amplification limit, the path MTU will not be validated.  To ensure that
+the path MTU is large enough, the endpoint MUST perform a second path validation
+by sending a PATH_CHALLENGE frame in a datagram of at least 1200 bytes.  This
+additional validation can be performed after a PATH_RESPONSE is successfully
+received or when enough bytes have been received on the path that sending the
+larger datagram will not result in exceeding the anti-amplification limit.<a href="#section-8.2.1-6" class="pilcrow">¶</a></p>
+<p id="section-8.2.1-7">Unlike other cases where datagrams are expanded, endpoints MUST NOT discard
+datagrams that appear to be too small when they contain PATH_CHALLENGE or
+PATH_RESPONSE.<a href="#section-8.2.1-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="path-validation-responses">
@@ -4085,7 +4100,10 @@ NOT be enforced by the endpoint that initiates path validation as that would
 enable an attack on migration; see <a href="#off-path-forward" class="xref">Section 9.3.3</a>.<a href="#section-8.2.2-2" class="pilcrow">¶</a></p>
 <p id="section-8.2.2-3">An endpoint MUST expand datagrams that contain a PATH_RESPONSE frame to at
 least the smallest allowed maximum datagram size of 1200 bytes. This verifies
-that the path is able to carry datagrams of this size in both directions.<a href="#section-8.2.2-3" class="pilcrow">¶</a></p>
+that the path is able to carry datagrams of this size in both directions.
+However, an endpoint MUST NOT expand the datagram containing the PATH_RESPONSE
+if the resulting data exceeds the anti-amplification limit. This is expected to
+only occur if the received PATH_CHALLENGE was not sent in an expanded datagram.<a href="#section-8.2.2-3" class="pilcrow">¶</a></p>
 <p id="section-8.2.2-4">An endpoint MUST NOT send more than one PATH_RESPONSE frame in response to one
 PATH_CHALLENGE frame; see <a href="#retransmission-of-information" class="xref">Section 13.3</a>.  The peer is
 expected to send more PATH_CHALLENGE frames as necessary to evoke additional
@@ -4101,9 +4119,15 @@ PATH_RESPONSE frames.<a href="#section-8.2.2-4" class="pilcrow">¶</a></p>
 the data that was sent in a previous PATH_CHALLENGE frame.  A PATH_RESPONSE
 frame received on any network path validates the path on which the
 PATH_CHALLENGE was sent.<a href="#section-8.2.3-1" class="pilcrow">¶</a></p>
-<p id="section-8.2.3-2">Receipt of an acknowledgment for a packet containing a PATH_CHALLENGE frame is
+<p id="section-8.2.3-2">If the PATH_CHALLENGE frame that resulted in successful path validation was sent
+in a datagram that was not expanded to at least 1200 bytes, the endpoint can
+regard the address as valid. The endpoint is then able to send more than three
+times the amount of data that has been received. However, the endpoint MUST
+initiate another path validation with an expanded datagram to verify that the
+path supports required MTU.<a href="#section-8.2.3-2" class="pilcrow">¶</a></p>
+<p id="section-8.2.3-3">Receipt of an acknowledgment for a packet containing a PATH_CHALLENGE frame is
 not adequate validation, since the acknowledgment can be spoofed by a malicious
-peer.<a href="#section-8.2.3-2" class="pilcrow">¶</a></p>
+peer.<a href="#section-8.2.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="failed-path-validation">
@@ -4128,7 +4152,10 @@ validation to succeed.<a href="#section-8.2.4-4" class="pilcrow">¶</a></p>
 unusable.  This does not necessarily imply a failure of the connection -
 endpoints can continue sending packets over other paths as appropriate.  If no
 paths are available, an endpoint can wait for a new path to become available or
-close the connection.<a href="#section-8.2.4-5" class="pilcrow">¶</a></p>
+close the connection.  An endpoint that has no valid network path to its peer
+MAY signal this using the NO_VIABLE_PATH connection error, noting that this is
+only possible if the network path exists but does not support the required
+MTU (<a href="#datagram-size" class="xref">Section 14</a>).<a href="#section-8.2.4-5" class="pilcrow">¶</a></p>
 <p id="section-8.2.4-6">A path validation might be abandoned for other reasons besides
 failure. Primarily, this happens if a connection migration to a new path is
 initiated while a path validation on the old path is in progress.<a href="#section-8.2.4-6" class="pilcrow">¶</a></p>
@@ -4252,15 +4279,11 @@ significantly more data than the spoofing peer, connection migration might be
 used to amplify the volume of data that an attacker can generate toward a
 victim.<a href="#section-9.3.1-1" class="pilcrow">¶</a></p>
 <p id="section-9.3.1-2">As described in <a href="#migration-response" class="xref">Section 9.3</a>, an endpoint is required to validate a
-peer's new address to confirm the peer's possession of the new address.  Until a
-peer's address is deemed valid, an endpoint MUST limit the rate at which it
-sends data to this address.  The endpoint MUST NOT send more than a minimum
-congestion window's worth of data per estimated round-trip time (kMinimumWindow,
-as defined in <span>[<a href="#QUIC-RECOVERY" class="xref">QUIC-RECOVERY</a>]</span>).  In the absence of this limit, an endpoint
-risks being used for a denial of service attack against an unsuspecting victim.
-Note that since the endpoint will not have any round-trip time measurements to
-this address, the estimate SHOULD be the default initial value; see
-<span>[<a href="#QUIC-RECOVERY" class="xref">QUIC-RECOVERY</a>]</span>.<a href="#section-9.3.1-2" class="pilcrow">¶</a></p>
+peer's new address to confirm the peer's possession of the new address. Until a
+peer's address is deemed valid, an endpoint limits the amount of data it sends
+to that address; see <a href="#address-validation" class="xref">Section 8</a>. In the absence of this limit, an
+endpoint risks being used for a denial of service attack against an
+unsuspecting victim.<a href="#section-9.3.1-2" class="pilcrow">¶</a></p>
 <p id="section-9.3.1-3">If an endpoint skips validation of a peer address as described above, it does
 not need to limit its sending rate.<a href="#section-9.3.1-3" class="pilcrow">¶</a></p>
 </section>
@@ -4517,9 +4540,7 @@ protect against potential attacks as described in <a href="#address-spoofing" cl
 might also occur because the client's access network used a different NAT
 binding for the server's preferred address.<a href="#section-9.6.3-3" class="pilcrow">¶</a></p>
 <p id="section-9.6.3-4">Servers SHOULD initiate path validation to the client's new address upon
-receiving a probe packet from a different address.  Servers MUST NOT send more
-than a minimum congestion window's worth of non-probing packets to the new
-address before path validation is complete.<a href="#section-9.6.3-4" class="pilcrow">¶</a></p>
+receiving a probe packet from a different address; see <a href="#address-validation" class="xref">Section 8</a>.<a href="#section-9.6.3-4" class="pilcrow">¶</a></p>
 <p id="section-9.6.3-5">A client that migrates to a new address SHOULD use a preferred address from the
 same address family for the server.<a href="#section-9.6.3-5" class="pilcrow">¶</a></p>
 <p id="section-9.6.3-6">The connection ID provided in the preferred_address transport parameter is not
@@ -8978,12 +8999,20 @@ algorithm used by the given connection.<a href="#section-20.1-2.32.1" class="pil
 </dd>
           <dd class="break"></dd>
 <dt id="section-20.1-2.33">
-CRYPTO_ERROR (0x1XX):  </dt>
+NO_VIABLE_PATH (0x10):  </dt>
           <dd style="margin-left: 1.5em" id="section-20.1-2.34">
-            <p id="section-20.1-2.34.1">The cryptographic handshake failed.  A range of 256 values is reserved for
+            <p id="section-20.1-2.34.1">An endpoint has determined that the network path is incapable of supporting
+QUIC.  An endpoint is unlikely to receive CONNECTION_CLOSE carrying this code
+except when the path does not support a large enough MTU.<a href="#section-20.1-2.34.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-20.1-2.35">
+CRYPTO_ERROR (0x1XX):  </dt>
+          <dd style="margin-left: 1.5em" id="section-20.1-2.36">
+            <p id="section-20.1-2.36.1">The cryptographic handshake failed.  A range of 256 values is reserved for
 carrying error codes specific to the cryptographic handshake that is used.
 Codes for errors occurring when TLS is used for the crypto handshake are
-described in Section 4.8 of <span>[<a href="#QUIC-TLS" class="xref">QUIC-TLS</a>]</span>.<a href="#section-20.1-2.34.1" class="pilcrow">¶</a></p>
+described in Section 4.8 of <span>[<a href="#QUIC-TLS" class="xref">QUIC-TLS</a>]</span>.<a href="#section-20.1-2.36.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
@@ -9071,10 +9100,20 @@ defense against DoS attacks on the handshake.<a href="#section-21.1.1-4" class="
 that claims a given address is able to receive packets at that address. Address
 validation limits amplification attack targets to addresses for which an
 attacker can observe packets.<a href="#section-21.1.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-21.1.1.1-2">Prior to validation, endpoints are limited in what they are able to send.
-During the handshake, a server cannot send more than three times the data it
-receives; clients that initiate new connections or migrate to a new network
-path are limited.<a href="#section-21.1.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-21.1.1.1-2">Prior to address validation, endpoints are limited in what they are able to
+send.  Endpoints cannot send data toward an unvalidated address in excess of
+three times the data received from that address.<a href="#section-21.1.1.1-2" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-21.1.1.1-3">
+              <dt id="section-21.1.1.1-3.1">
+Note:  </dt>
+              <dd style="margin-left: 1.5em" id="section-21.1.1.1-3.2">
+                <p id="section-21.1.1.1-3.2.1">The anti-amplification limit only applies when an endpoint responds to packets
+received from an unvalidated address. The anti-amplification limit does not
+apply to clients when establishing a new connection or when initiating
+connection migration.<a href="#section-21.1.1.1-3.2.1" class="pilcrow">¶</a></p>
+</dd>
+            <dd class="break"></dd>
+</dl>
 </section>
 </div>
 <div id="server-side-dos">
@@ -10415,6 +10454,14 @@ specification reference is provided.<a href="#section-22.5-4.4.1" class="pilcrow
                 <a href="#error-codes" class="xref">Section 20</a>
 </td>
             </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">0x10</td>
+              <td class="text-left" rowspan="1" colspan="1">NO_VIABLE_PATH</td>
+              <td class="text-left" rowspan="1" colspan="1">No viable network path exists</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <a href="#error-codes" class="xref">Section 20</a>
+</td>
+            </tr>
           </tbody>
         </table>
 </div>
@@ -10814,8 +10861,8 @@ incurred.<a href="#section-a.4-8" class="pilcrow">¶</a></p>
       <h2 id="name-change-log">
 <a href="#section-appendix.b" class="section-number selfRef">Appendix B. </a><a href="#name-change-log" class="section-name selfRef">Change Log</a>
       </h2>
-<ul class="ulEmpty normal">
-<li class="ulEmpty normal" id="section-appendix.b-1.1">
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-appendix.b-1.1">
           <strong>RFC Editor's Note:</strong> Please remove this section prior to publication of a
 final version of this document.<a href="#section-appendix.b-1.1" class="pilcrow">¶</a>
 </li>
