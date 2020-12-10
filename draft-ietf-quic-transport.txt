@@ -5,8 +5,8 @@
 QUIC                                                     J. Iyengar, Ed.
 Internet-Draft                                                    Fastly
 Intended status: Standards Track                         M. Thomson, Ed.
-Expires: 11 June 2021                                            Mozilla
-                                                         8 December 2020
+Expires: 13 June 2021                                            Mozilla
+                                                        10 December 2020
 
 
            QUIC: A UDP-Based Multiplexed and Secure Transport
@@ -48,7 +48,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 June 2021.
+   This Internet-Draft will expire on 13 June 2021.
 
 Copyright Notice
 
@@ -253,9 +253,10 @@ Table of Contents
        22.1.2.  Selecting Codepoints
        22.1.3.  Reclaiming Provisional Codepoints
        22.1.4.  Permanent Registrations
-     22.2.  QUIC Transport Parameter Registry
-     22.3.  QUIC Frame Types Registry
-     22.4.  QUIC Transport Error Codes Registry
+     22.2.  QUIC Versions Registry
+     22.3.  QUIC Transport Parameter Registry
+     22.4.  QUIC Frame Types Registry
+     22.5.  QUIC Transport Error Codes Registry
    23. References
      23.1.  Normative References
      23.2.  Informative References
@@ -2199,7 +2200,7 @@ Table of Contents
    by setting a default of the most conservative value.
 
    New transport parameters can be registered according to the rules in
-   Section 22.2.
+   Section 22.3.
 
 7.5.  Cryptographic Message Buffering
 
@@ -3988,7 +3989,7 @@ Table of Contents
       Section 4.
 
    The "Pkts" and "Spec" columns in Table 3 do not form part of the IANA
-   registry; see Section 22.3.
+   registry; see Section 22.4.
 
    An endpoint MUST treat the receipt of a frame of unknown type as a
    connection error of type FRAME_ENCODING_ERROR.
@@ -6732,7 +6733,7 @@ Table of Contents
    control unless specified in the extension.
 
    An IANA registry is used to manage the assignment of frame types; see
-   Section 22.3.
+   Section 22.4.
 
 20.  Error Codes
 
@@ -6813,7 +6814,7 @@ Table of Contents
       when TLS is used for the crypto handshake are described in
       Section 4.8 of [QUIC-TLS].
 
-   See Section 22.4 for details of registering new error codes.
+   See Section 22.5 for details of registering new error codes.
 
    In defining these error codes, several principles are applied.  Error
    conditions that might require specific action on the part of a
@@ -7796,7 +7797,7 @@ Table of Contents
 
    The creation of a registry MAY identify a range of codepoints where
    registrations are governed by a different registration policy.  For
-   instance, the frame type registry in Section 22.3 has a stricter
+   instance, the frame type registry in Section 22.4 has a stricter
    policy for codepoints in the range from 0 to 63.
 
    Any stricter requirements for permanent registrations do not prevent
@@ -7810,7 +7811,36 @@ Table of Contents
    and list a change controller of the IETF and a contact of the QUIC
    working group (quic@ietf.org).
 
-22.2.  QUIC Transport Parameter Registry
+22.2.  QUIC Versions Registry
+
+   IANA [SHALL add/has added] a registry for "QUIC Versions" under a
+   "QUIC" heading.
+
+   The "QUIC Versions" registry governs a 32-bit space; see Section 15.
+   This registry follows the registration policy from Section 22.1.
+   Permanent registrations in this registry are assigned using the
+   Specification Required policy ([RFC8126]).
+
+   The codepoint of 0x00000001 to the protocol is assigned with
+   permanent status to the protocol defined in this document.  The
+   codepoint of 0x00000000 is permanently reserved; the note for this
+   codepoint [shall] indicate[s] that this version is reserved for
+   Version Negotiation.
+
+   All codepoints that follow the pattern 0x?a?a?a?a are reserved and
+   MUST NOT be assigned by IANA and MUST NOT appear in the listing of
+   assigned values.
+
+   [[RFC editor: please remove the following note before publication.]]
+
+   IANA note:  Several pre-standardization versions will likely be in
+      use at the time of publication.  There is no need to document
+      these in an RFC, but recording information about these version
+      will ensure that the information in the registry is accurate.  The
+      document editors or working group chairs can facilitate getting
+      the necessary information.
+
+22.3.  QUIC Transport Parameter Registry
 
    IANA [SHALL add/has added] a registry for "QUIC Transport Parameters"
    under a "QUIC" heading.
@@ -7871,7 +7901,7 @@ Table of Contents
    is, 27, 58, 89, ...) are reserved; these values MUST NOT be assigned
    by IANA and MUST NOT appear in the listing of assigned values.
 
-22.3.  QUIC Frame Types Registry
+22.4.  QUIC Frame Types Registry
 
    IANA [SHALL add/has added] a registry for "QUIC Frame Types" under a
    "QUIC" heading.
@@ -7893,7 +7923,7 @@ Table of Contents
    permanent registrations SHOULD describe the means by which an
    endpoint might determine that it can send the identified type of
    frame.  An accompanying transport parameter registration is expected
-   for most registrations; see Section 22.2.  Specifications for
+   for most registrations; see Section 22.3.  Specifications for
    permanent registrations also need to describe the format and assigned
    semantics of any fields in the frame.
 
@@ -7901,7 +7931,7 @@ Table of Contents
    that the registry does not include the "Pkts" and "Spec" columns from
    Table 3.
 
-22.4.  QUIC Transport Error Codes Registry
+22.5.  QUIC Transport Error Codes Registry
 
    IANA [SHALL add/has added] a registry for "QUIC Transport Error
    Codes" under a "QUIC" heading.
@@ -8004,12 +8034,12 @@ Table of Contents
    [QUIC-RECOVERY]
               Iyengar, J., Ed. and I. Swett, Ed., "QUIC Loss Detection
               and Congestion Control", Work in Progress, Internet-Draft,
-              draft-ietf-quic-recovery, 8 December 2020,
+              draft-ietf-quic-recovery, 10 December 2020,
               <https://tools.ietf.org/html/draft-ietf-quic-recovery>.
 
    [QUIC-TLS] Thomson, M., Ed. and S. Turner, Ed., "Using Transport
               Layer Security (TLS) to Secure QUIC", Work in Progress,
-              Internet-Draft, draft-ietf-quic-tls, 8 December 2020,
+              Internet-Draft, draft-ietf-quic-tls, 10 December 2020,
               <https://tools.ietf.org/html/draft-ietf-quic-tls>.
 
    [RFC1191]  Mogul, J. and S. Deering, "Path MTU discovery", RFC 1191,
@@ -8125,7 +8155,7 @@ Table of Contents
    [QUIC-INVARIANTS]
               Thomson, M., "Version-Independent Properties of QUIC",
               Work in Progress, Internet-Draft, draft-ietf-quic-
-              invariants, 8 December 2020,
+              invariants, 10 December 2020,
               <https://tools.ietf.org/html/draft-ietf-quic-invariants>.
 
    [QUIC-MANAGEABILITY]
