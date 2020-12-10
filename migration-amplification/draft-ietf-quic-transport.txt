@@ -2236,7 +2236,7 @@ Table of Contents
    that packet, the attacker can use the server to send more data toward
    the victim than it would be able to send on its own.
 
-   The primary defense against amplification attack is verifying that a
+   The primary defense against amplification attacks is verifying that a
    peer is able to receive packets at the transport address that it
    claims.  Therefore, after receiving packets from an address that is
    not yet validated, an endpoint MUST limit the amount of data it sends
@@ -6916,7 +6916,8 @@ Table of Contents
    Note:  The anti-amplification limit only applies when an endpoint
       responds to packets received from an unvalidated address.  The
       anti-amplification limit does not apply to clients when
-      establishing a new connection or when initiating path migration.
+      establishing a new connection or when initiating connection
+      migration.
 
 21.1.1.2.  Server-Side DoS
 
