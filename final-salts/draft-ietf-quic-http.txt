@@ -4,8 +4,8 @@
 
 QUIC                                                      M. Bishop, Ed.
 Internet-Draft                                                    Akamai
-Intended status: Standards Track                         8 December 2020
-Expires: 11 June 2021
+Intended status: Standards Track                        11 December 2020
+Expires: 14 June 2021
 
 
              Hypertext Transfer Protocol Version 3 (HTTP/3)
@@ -45,7 +45,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 June 2021.
+   This Internet-Draft will expire on 14 June 2021.
 
 Copyright Notice
 
@@ -327,12 +327,13 @@ Table of Contents
 
    frame:  The smallest unit of communication on a stream in HTTP/3,
       consisting of a header and a variable-length sequence of bytes
-      structured according to the frame type.  Protocol elements called
-      "frames" exist in both this document and [QUIC-TRANSPORT].  Where
-      frames from [QUIC-TRANSPORT] are referenced, the frame name will
-      be prefaced with "QUIC."  For example, "QUIC CONNECTION_CLOSE
-      frames."  References without this preface refer to frames defined
-      in Section 7.2.
+      structured according to the frame type.
+
+      Protocol elements called "frames" exist in both this document and
+      [QUIC-TRANSPORT].  Where frames from [QUIC-TRANSPORT] are
+      referenced, the frame name will be prefaced with "QUIC."  For
+      example, "QUIC CONNECTION_CLOSE frames."  References without this
+      preface refer to frames defined in Section 7.2.
 
    HTTP/3 connection:  A QUIC connection where the negotiated
       application protocol is HTTP/3.
@@ -2533,13 +2534,13 @@ Table of Contents
 
    [QPACK]    Krasic, C., Bishop, M., and A. Frindell, Ed., "QPACK:
               Header Compression for HTTP over QUIC", Work in Progress,
-              Internet-Draft, draft-ietf-quic-qpack, 8 December 2020,
+              Internet-Draft, draft-ietf-quic-qpack, 11 December 2020,
               <https://tools.ietf.org/html/draft-ietf-quic-qpack>.
 
    [QUIC-TRANSPORT]
               Iyengar, J., Ed. and M. Thomson, Ed., "QUIC: A UDP-Based
               Multiplexed and Secure Transport", Work in Progress,
-              Internet-Draft, draft-ietf-quic-transport, 8 December
+              Internet-Draft, draft-ietf-quic-transport, 11 December
               2020,
               <https://tools.ietf.org/html/draft-ietf-quic-transport>.
 
