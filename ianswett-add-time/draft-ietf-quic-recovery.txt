@@ -5,8 +5,8 @@
 QUIC                                                     J. Iyengar, Ed.
 Internet-Draft                                                    Fastly
 Intended status: Standards Track                           I. Swett, Ed.
-Expires: 13 June 2021                                             Google
-                                                        10 December 2020
+Expires: 14 June 2021                                             Google
+                                                        11 December 2020
 
 
                QUIC Loss Detection and Congestion Control
@@ -43,7 +43,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 June 2021.
+   This Internet-Draft will expire on 14 June 2021.
 
 Copyright Notice
 
@@ -1328,13 +1328,13 @@ Table of Contents
 
    [QUIC-TLS] Thomson, M., Ed. and S. Turner, Ed., "Using TLS to Secure
               QUIC", Work in Progress, Internet-Draft, draft-ietf-quic-
-              tls, 10 December 2020,
+              tls, 11 December 2020,
               <https://tools.ietf.org/html/draft-ietf-quic-tls>.
 
    [QUIC-TRANSPORT]
               Iyengar, J., Ed. and M. Thomson, Ed., "QUIC: A UDP-Based
               Multiplexed and Secure Transport", Work in Progress,
-              Internet-Draft, draft-ietf-quic-transport, 10 December
+              Internet-Draft, draft-ietf-quic-transport, 11 December
               2020,
               <https://tools.ietf.org/html/draft-ietf-quic-transport>.
 
@@ -2021,16 +2021,16 @@ B.8.  On Packets Lost
    Invoked when DetectAndRemoveLostPackets deems packets lost.
 
    OnPacketsLost(lost_packets):
-     time_of_latest_in_flight_loss = 0
+     sent_time_of_last_loss = 0
      // Remove lost packets from bytes_in_flight.
      for lost_packet in lost_packets:
        if lost_packet.in_flight:
          bytes_in_flight -= lost_packet.sent_bytes
-         time_of_latest_in_flight_loss =
-           max(time_of_latest_in_flight_loss, lost_packet.time_sent)
+         sent_time_of_last_loss =
+           max(sent_time_of_last_loss, lost_packet.time_sent)
      // Congestion event if in-flight packets were lost
-     if (time_of_latest_in_flight_loss != 0):
-       OnCongestionEvent(time_of_latest_in_flight_loss)
+     if (sent_time_of_last_loss != 0):
+       OnCongestionEvent(sent_time_of_last_loss)
 
      // Reset the congestion window if the loss of these
      // packets indicates persistent congestion.
