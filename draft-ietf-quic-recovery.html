@@ -3432,16 +3432,16 @@ ProcessECN(ack, pn_space):
 <div class="artwork art-text alignLeft" id="section-b.8-2">
 <pre>
 OnPacketsLost(lost_packets):
-  latest_in_flight_lost = 0
+  sent_time_of_last_loss = 0
   // Remove lost packets from bytes_in_flight.
   for lost_packet in lost_packets:
     if lost_packet.in_flight:
       bytes_in_flight -= lost_packet.sent_bytes
-      latest_in_flight_lost =
-        max(latest_in_flight_lost, lost_packet.time_sent)
+      sent_time_of_last_loss =
+        max(sent_time_of_last_loss, lost_packet.time_sent)
   // Congestion event if in-flight packets were lost
-  if (latest_in_flight_lost != 0):
-    OnCongestionEvent(latest_in_flight_lost)
+  if (sent_time_of_last_loss != 0):
+    OnCongestionEvent(sent_time_of_last_loss)
 
   // Reset the congestion window if the loss of these
   // packets indicates persistent congestion.
@@ -3485,8 +3485,8 @@ RemoveFromBytesInFlight(discarded_packets):
       <h2 id="name-change-log">
 <a href="#section-appendix.c" class="section-number selfRef">Appendix C. </a><a href="#name-change-log" class="section-name selfRef">Change Log</a>
       </h2>
-<ul class="ulEmpty normal">
-<li class="ulEmpty normal" id="section-appendix.c-1.1">
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-appendix.c-1.1">
           <strong>RFC Editor's Note:</strong>  Please remove this section prior to
 publication of a final version of this document.<a href="#section-appendix.c-1.1" class="pilcrow">¶</a>
 </li>
