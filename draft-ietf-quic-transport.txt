@@ -26,7 +26,7 @@ Abstract
 DO NOT DEPLOY THIS VERSION OF QUIC
 
    DO NOT DEPLOY THIS VERSION OF QUIC UNTIL IT IS IN AN RFC.  This
-   verion is still a work in progress.  For trial deployments, please
+   version is still a work in progress.  For trial deployments, please
    use earlier versions.
 
 Note to Readers
