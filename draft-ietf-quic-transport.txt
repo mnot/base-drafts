@@ -23,6 +23,12 @@ Abstract
    TLS for key negotiation, loss detection, and an exemplary congestion
    control algorithm.
 
+DO NOT DEPLOY THIS VERSION OF QUIC
+
+   DO NOT DEPLOY THIS VERSION OF QUIC UNTIL IT IS IN AN RFC.  This
+   verion is still a work in progress.  For trial deployments, please
+   use earlier versions.
+
 Note to Readers
 
    Discussion of this draft takes place on the QUIC working group
