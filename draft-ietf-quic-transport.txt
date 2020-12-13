@@ -266,39 +266,40 @@ Table of Contents
      A.3.  Sample Packet Number Decoding Algorithm
      A.4.  Sample ECN Validation Algorithm
    Appendix B.  Change Log
-     B.1.  Since draft-ietf-quic-transport-31
-     B.2.  Since draft-ietf-quic-transport-30
-     B.3.  Since draft-ietf-quic-transport-29
-     B.4.  Since draft-ietf-quic-transport-28
-     B.5.  Since draft-ietf-quic-transport-27
-     B.6.  Since draft-ietf-quic-transport-26
-     B.7.  Since draft-ietf-quic-transport-25
-     B.8.  Since draft-ietf-quic-transport-24
-     B.9.  Since draft-ietf-quic-transport-23
-     B.10. Since draft-ietf-quic-transport-22
-     B.11. Since draft-ietf-quic-transport-21
-     B.12. Since draft-ietf-quic-transport-20
-     B.13. Since draft-ietf-quic-transport-19
-     B.14. Since draft-ietf-quic-transport-18
-     B.15. Since draft-ietf-quic-transport-17
-     B.16. Since draft-ietf-quic-transport-16
-     B.17. Since draft-ietf-quic-transport-15
-     B.18. Since draft-ietf-quic-transport-14
-     B.19. Since draft-ietf-quic-transport-13
-     B.20. Since draft-ietf-quic-transport-12
-     B.21. Since draft-ietf-quic-transport-11
-     B.22. Since draft-ietf-quic-transport-10
-     B.23. Since draft-ietf-quic-transport-09
-     B.24. Since draft-ietf-quic-transport-08
-     B.25. Since draft-ietf-quic-transport-07
-     B.26. Since draft-ietf-quic-transport-06
-     B.27. Since draft-ietf-quic-transport-05
-     B.28. Since draft-ietf-quic-transport-04
-     B.29. Since draft-ietf-quic-transport-03
-     B.30. Since draft-ietf-quic-transport-02
-     B.31. Since draft-ietf-quic-transport-01
-     B.32. Since draft-ietf-quic-transport-00
-     B.33. Since draft-hamilton-quic-transport-protocol-01
+     B.1.  Since draft-ietf-quic-transport-32
+     B.2.  Since draft-ietf-quic-transport-31
+     B.3.  Since draft-ietf-quic-transport-30
+     B.4.  Since draft-ietf-quic-transport-29
+     B.5.  Since draft-ietf-quic-transport-28
+     B.6.  Since draft-ietf-quic-transport-27
+     B.7.  Since draft-ietf-quic-transport-26
+     B.8.  Since draft-ietf-quic-transport-25
+     B.9.  Since draft-ietf-quic-transport-24
+     B.10. Since draft-ietf-quic-transport-23
+     B.11. Since draft-ietf-quic-transport-22
+     B.12. Since draft-ietf-quic-transport-21
+     B.13. Since draft-ietf-quic-transport-20
+     B.14. Since draft-ietf-quic-transport-19
+     B.15. Since draft-ietf-quic-transport-18
+     B.16. Since draft-ietf-quic-transport-17
+     B.17. Since draft-ietf-quic-transport-16
+     B.18. Since draft-ietf-quic-transport-15
+     B.19. Since draft-ietf-quic-transport-14
+     B.20. Since draft-ietf-quic-transport-13
+     B.21. Since draft-ietf-quic-transport-12
+     B.22. Since draft-ietf-quic-transport-11
+     B.23. Since draft-ietf-quic-transport-10
+     B.24. Since draft-ietf-quic-transport-09
+     B.25. Since draft-ietf-quic-transport-08
+     B.26. Since draft-ietf-quic-transport-07
+     B.27. Since draft-ietf-quic-transport-06
+     B.28. Since draft-ietf-quic-transport-05
+     B.29. Since draft-ietf-quic-transport-04
+     B.30. Since draft-ietf-quic-transport-03
+     B.31. Since draft-ietf-quic-transport-02
+     B.32. Since draft-ietf-quic-transport-01
+     B.33. Since draft-ietf-quic-transport-00
+     B.34. Since draft-hamilton-quic-transport-protocol-01
    Contributors
    Authors' Addresses
 
@@ -8436,7 +8437,31 @@ Appendix B.  Change Log
 
    Issue and pull request numbers are listed with a leading octothorp.
 
-B.1.  Since draft-ietf-quic-transport-31
+B.1.  Since draft-ietf-quic-transport-32
+
+   *  Endpoints are required to limit the total data they send in
+      response to an apparent connection migration to three times what
+      was received (#4257, #4264)
+
+   *  Added an error code for path validation failures (#4257, #4331)
+
+   *  Defined DoS protections for clients during the handshake (#4259,
+      #4330)
+
+   *  Prohibited connection errors when datagrams are not the required
+      size (#4273, #4342)
+
+   *  A number of improvements to IANA considerations:
+
+      -  Added a registry for versions (#4345, #4280)
+
+      -  Clarified rules for first reserved value (#4378, #4389)
+
+      -  Reserved values are not added to the registry (#4372, #4428)
+
+   *  Added final version numbers (#4430)
+
+B.2.  Since draft-ietf-quic-transport-31
 
    *  Require expansion of datagrams to ensure that a path supports at
       least 1200 bytes in both directions:
@@ -8454,7 +8479,7 @@ B.1.  Since draft-ietf-quic-transport-31
    *  Split contact into contact and change controller for IANA
       registrations (#4230, #4239)
 
-B.2.  Since draft-ietf-quic-transport-30
+B.3.  Since draft-ietf-quic-transport-30
 
    *  Use TRANSPORT_PARAMETER_ERROR for an invalid transport parameter
       (#4099, #4100)
@@ -8465,7 +8490,7 @@ B.2.  Since draft-ietf-quic-transport-30
    *  Allow use of address validation token when server address changes
       (#4076, #4089)
 
-B.3.  Since draft-ietf-quic-transport-29
+B.4.  Since draft-ietf-quic-transport-29
 
    *  Require the same connection ID on coalesced packets (#3800, #3930)
 
@@ -8498,7 +8523,7 @@ B.3.  Since draft-ietf-quic-transport-29
    *  Limit recommendation for immediate acknowledgment to when ack-
       eliciting packets are reordered (#4001, #4000)
 
-B.4.  Since draft-ietf-quic-transport-28
+B.5.  Since draft-ietf-quic-transport-28
 
    *  Made SERVER_BUSY error (0x2) more generic, now CONNECTION_REFUSED
       (#3709, #3690, #3694)
@@ -8512,7 +8537,7 @@ B.4.  Since draft-ietf-quic-transport-28
    *  disable_active_migration does not apply to the addresses offered
       in server_preferred_address (#3608, #3670)
 
-B.5.  Since draft-ietf-quic-transport-27
+B.6.  Since draft-ietf-quic-transport-27
 
    *  Allowed CONNECTION_CLOSE in any packet number space, with a
       requirement to use a new transport-level error for application-
@@ -8561,12 +8586,12 @@ B.5.  Since draft-ietf-quic-transport-27
 
    *  Opening a stream in the wrong direction is an error (#3527)
 
-B.6.  Since draft-ietf-quic-transport-26
+B.7.  Since draft-ietf-quic-transport-26
 
    *  Change format of transport parameters to use varints (#3294,
       #3169)
 
-B.7.  Since draft-ietf-quic-transport-25
+B.8.  Since draft-ietf-quic-transport-25
 
    *  Define the use of CONNECTION_CLOSE prior to establishing
       connection state (#3269, #3297, #3292)
@@ -8576,7 +8601,7 @@ B.7.  Since draft-ietf-quic-transport-25
 
    *  Define the timer for address validation (#2910, #3339)
 
-B.8.  Since draft-ietf-quic-transport-24
+B.9.  Since draft-ietf-quic-transport-24
 
    *  Added HANDSHAKE_DONE to signal handshake confirmation (#2863,
       #3142, #3145)
@@ -8628,7 +8653,7 @@ B.8.  Since draft-ietf-quic-transport-24
    *  Packets on one path must not adjust values for a different path
       (#2909, #3139)
 
-B.9.  Since draft-ietf-quic-transport-23
+B.10.  Since draft-ietf-quic-transport-23
 
    *  Allow ClientHello to span multiple packets (#2928, #3045)
 
@@ -8664,7 +8689,7 @@ B.9.  Since draft-ietf-quic-transport-23
 
    *  Servers have to change connection IDs in Retry (#2837, #3147)
 
-B.10.  Since draft-ietf-quic-transport-22
+B.11.  Since draft-ietf-quic-transport-22
 
    *  Rules for preventing correlation by connection ID tightened
       (#2084, #2929)
@@ -8718,12 +8743,12 @@ B.10.  Since draft-ietf-quic-transport-22
    *  Moved ACK generation guidance from recovery draft to transport
       draft (#1860, #2916).
 
-B.11.  Since draft-ietf-quic-transport-21
+B.12.  Since draft-ietf-quic-transport-21
 
    *  Connection ID lengths are now one octet, but limited in version 1
       to 20 octets of length (#2736, #2749)
 
-B.12.  Since draft-ietf-quic-transport-20
+B.13.  Since draft-ietf-quic-transport-20
 
    *  Error codes are encoded as variable-length integers (#2672, #2680)
 
@@ -8767,7 +8792,7 @@ B.12.  Since draft-ietf-quic-transport-20
    *  Document hack for enabling routing of ICMP when doing PMTU probing
       (#1243, #2402)
 
-B.13.  Since draft-ietf-quic-transport-19
+B.14.  Since draft-ietf-quic-transport-19
 
    *  Refine discussion of 0-RTT transport parameters (#2467, #2464)
 
@@ -8794,7 +8819,7 @@ B.13.  Since draft-ietf-quic-transport-19
 
    *  Stateless reset uses a short header packet (#2599, #2600)
 
-B.14.  Since draft-ietf-quic-transport-18
+B.15.  Since draft-ietf-quic-transport-18
 
    *  Removed version negotiation; version negotiation, including
       authentication of the result, will be addressed in the next
@@ -8813,7 +8838,7 @@ B.14.  Since draft-ietf-quic-transport-18
 
    *  Increased the set of permissible frames in 0-RTT (#2344, #2355)
 
-B.15.  Since draft-ietf-quic-transport-17
+B.16.  Since draft-ietf-quic-transport-17
 
    *  Stream-related errors now use STREAM_STATE_ERROR (#2305)
 
@@ -8852,7 +8877,7 @@ B.15.  Since draft-ietf-quic-transport-17
 
    *  ACK of non-existent packet is illegal (#2298, #2302)
 
-B.16.  Since draft-ietf-quic-transport-16
+B.17.  Since draft-ietf-quic-transport-16
 
    *  Stream limits are defined as counts, not maximums (#1850, #1906)
 
@@ -8907,11 +8932,11 @@ B.16.  Since draft-ietf-quic-transport-16
 
    *  ICMP PTB validation clarifications (#2161, #2109, #2108)
 
-B.17.  Since draft-ietf-quic-transport-15
+B.18.  Since draft-ietf-quic-transport-15
 
    Substantial editorial reorganization; no technical changes.
 
-B.18.  Since draft-ietf-quic-transport-14
+B.19.  Since draft-ietf-quic-transport-14
 
    *  Merge ACK and ACK_ECN (#1778, #1801)
 
@@ -8930,7 +8955,7 @@ B.18.  Since draft-ietf-quic-transport-14
 
    *  Prevent handshake deadlock (#1764, #1824)
 
-B.19.  Since draft-ietf-quic-transport-13
+B.20.  Since draft-ietf-quic-transport-13
 
    *  Streams open when higher-numbered streams of the same type open
       (#1342, #1549)
@@ -8968,7 +8993,7 @@ B.19.  Since draft-ietf-quic-transport-13
 
    *  Remove frame type field from APPLICATION_CLOSE (#1508, #1528)
 
-B.20.  Since draft-ietf-quic-transport-12
+B.21.  Since draft-ietf-quic-transport-12
 
    *  Changes to integration of the TLS handshake (#829, #1018, #1094,
       #1165, #1190, #1233, #1242, #1252, #1450, #1458)
@@ -9011,7 +9036,7 @@ B.20.  Since draft-ietf-quic-transport-12
 
    *  Added frame type extension mechanism (#58, #1473)
 
-B.21.  Since draft-ietf-quic-transport-11
+B.22.  Since draft-ietf-quic-transport-11
 
    *  Enable server to transition connections to a preferred address
       (#560, #1251)
@@ -9023,7 +9048,7 @@ B.21.  Since draft-ietf-quic-transport-11
 
    *  STREAM frames can now be empty (#1350)
 
-B.22.  Since draft-ietf-quic-transport-10
+B.23.  Since draft-ietf-quic-transport-10
 
    *  Swap payload length and packed number fields in long header
       (#1294)
@@ -9059,7 +9084,7 @@ B.22.  Since draft-ietf-quic-transport-10
    *  Remove implication that Version Negotiation is sent when a packet
       of the wrong version is received (#1197)
 
-B.23.  Since draft-ietf-quic-transport-09
+B.24.  Since draft-ietf-quic-transport-09
 
    *  Added PATH_CHALLENGE and PATH_RESPONSE frames to replace PING with
       Data and PONG frame.  Changed ACK frame type from 0x0e to 0x0d.
@@ -9086,7 +9111,7 @@ B.23.  Since draft-ietf-quic-transport-09
       omit_connection_id transport parameter and the corresponding short
       header flag. (#1089, #1052, #1146, #821, #745, #821, #1166, #1151)
 
-B.24.  Since draft-ietf-quic-transport-08
+B.25.  Since draft-ietf-quic-transport-08
 
    *  Clarified requirements for BLOCKED usage (#65, #924)
 
@@ -9114,7 +9139,7 @@ B.24.  Since draft-ietf-quic-transport-08
 
    *  Removed transport parameters from NewSessionTicket (#1015)
 
-B.25.  Since draft-ietf-quic-transport-07
+B.26.  Since draft-ietf-quic-transport-07
 
    *  The long header now has version before packet number (#926, #939)
 
@@ -9158,7 +9183,7 @@ B.25.  Since draft-ietf-quic-transport-07
    *  Increased the range over which packet numbers are randomized
       (#864, #850, #964)
 
-B.26.  Since draft-ietf-quic-transport-06
+B.27.  Since draft-ietf-quic-transport-06
 
    *  Replaced FNV-1a with AES-GCM for all "Cleartext" packets (#554)
 
@@ -9176,7 +9201,7 @@ B.26.  Since draft-ietf-quic-transport-06
 
    *  Require transport parameters to only appear once (#792)
 
-B.27.  Since draft-ietf-quic-transport-05
+B.28.  Since draft-ietf-quic-transport-05
 
    *  Stateless token is server-only (#726)
 
@@ -9191,7 +9216,7 @@ B.27.  Since draft-ietf-quic-transport-05
 
    *  Clarify Keep-alive requirements (#729)
 
-B.28.  Since draft-ietf-quic-transport-04
+B.29.  Since draft-ietf-quic-transport-04
 
    *  Introduce STOP_SENDING frame, RESET_STREAM only resets in one
       direction (#165)
@@ -9225,13 +9250,13 @@ B.28.  Since draft-ietf-quic-transport-04
 
    *  Update labels used in HKDF-Expand-Label to match TLS 1.3 (#642)
 
-B.29.  Since draft-ietf-quic-transport-03
+B.30.  Since draft-ietf-quic-transport-03
 
    *  Change STREAM and RESET_STREAM layout
 
    *  Add MAX_STREAM_ID settings
 
-B.30.  Since draft-ietf-quic-transport-02
+B.31.  Since draft-ietf-quic-transport-02
 
    *  The size of the initial packet payload has a fixed minimum (#267,
       #472)
@@ -9277,7 +9302,7 @@ B.30.  Since draft-ietf-quic-transport-02
 
    *  Expanded security considerations (#440, #444, #445, #448)
 
-B.31.  Since draft-ietf-quic-transport-01
+B.32.  Since draft-ietf-quic-transport-01
 
    *  Defined short and long packet headers (#40, #148, #361)
 
@@ -9372,7 +9397,7 @@ B.31.  Since draft-ietf-quic-transport-01
    *  Defined priority as the responsibility of the application protocol
       (#104, #303)
 
-B.32.  Since draft-ietf-quic-transport-00
+B.33.  Since draft-ietf-quic-transport-00
 
    *  Replaced DIVERSIFICATION_NONCE flag with KEY_PHASE flag
 
@@ -9384,7 +9409,7 @@ B.32.  Since draft-ietf-quic-transport-00
 
    *  Use big endian for all numeric values
 
-B.33.  Since draft-hamilton-quic-transport-protocol-01
+B.34.  Since draft-hamilton-quic-transport-protocol-01
 
    *  Adopted as base for draft-ietf-quic-tls
 
