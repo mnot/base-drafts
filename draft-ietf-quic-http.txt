@@ -833,7 +833,7 @@ Table of Contents
 
    *  the inclusion of uppercase field names, or
 
-   *  the inclusion of invalid characters in field names or values
+   *  the inclusion of invalid characters in field names or values.
 
    A request or response that includes a payload body can include a
    Content-Length header field.  A request or response is also malformed
@@ -847,7 +847,7 @@ Table of Contents
    intermediary not acting as a tunnel) MUST NOT forward a malformed
    request or response.  Malformed requests or responses that are
    detected MUST be treated as a stream error (Section 8) of type
-   H3_GENERAL_PROTOCOL_ERROR.
+   H3_MESSAGE_ERROR.
 
    For malformed requests, a server MAY send an HTTP response indicating
    the error prior to closing or resetting the stream.  Clients MUST NOT
@@ -1896,6 +1896,9 @@ Table of Contents
    H3_REQUEST_INCOMPLETE (0x10d):  The client's stream terminated
       without containing a fully-formed request.
 
+   H3_MESSAGE_ERROR (0x10e):  An HTTP message was malformed and cannot
+      be processed.
+
    H3_CONNECT_ERROR (0x10f):  The TCP connection established in response
       to a CONNECT request was reset or abnormally closed.
 
@@ -2434,6 +2437,9 @@ Table of Contents
    |                           |        | terminated   |               |
    |                           |        | early        |               |
    +---------------------------+--------+--------------+---------------+
+   | H3_MESSAGE_ERROR          | 0x010e | Malformed    | Section 8.1   |
+   |                           |        | message      |               |
+   +---------------------------+--------+--------------+---------------+
    | H3_CONNECT_ERROR          | 0x010f | TCP reset    | Section 8.1   |
    |                           |        | or error on  |               |
    |                           |        | CONNECT      |               |
@@ -2856,7 +2862,7 @@ A.4.  HTTP/2 Error Codes
 
    PROTOCOL_ERROR (0x1):  This is mapped to H3_GENERAL_PROTOCOL_ERROR
       except in cases where more specific error codes have been defined.
-      Such cases include H3_FRAME_UNEXPECTED and
+      Such cases include H3_FRAME_UNEXPECTED, H3_MESSAGE_ERROR, and
       H3_CLOSED_CRITICAL_STREAM defined in Section 8.1.
 
    INTERNAL_ERROR (0x2):  H3_INTERNAL_ERROR in Section 8.1.
