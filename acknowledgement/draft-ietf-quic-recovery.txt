@@ -70,7 +70,7 @@ Table of Contents
      4.3.  Clearer Loss Epoch
      4.4.  No Reneging
      4.5.  More ACK Ranges
-     4.6.  Explicit Correction For Delayed Acknowledgements
+     4.6.  Explicit Correction For Delayed Acknowledgments
      4.7.  Probe Timeout Replaces RTO and TLP
      4.8.  The Minimum Congestion Window is Two Packets
    5.  Estimating the Round-Trip Time
@@ -78,7 +78,7 @@ Table of Contents
      5.2.  Estimating min_rtt
      5.3.  Estimating smoothed_rtt and rttvar
    6.  Loss Detection
-     6.1.  Acknowledgement-Based Detection
+     6.1.  Acknowledgment-Based Detection
        6.1.1.  Packet Threshold
        6.1.2.  Time Threshold
      6.2.  Probe Timeout
@@ -129,7 +129,7 @@ Table of Contents
      B.2.  Variables of interest
      B.3.  Initialization
      B.4.  On Packet Sent
-     B.5.  On Packet Acknowledgement
+     B.5.  On Packet Acknowledgment
      B.6.  On New Congestion Event
      B.7.  Process ECN Information
      B.8.  On Packets Lost
@@ -303,7 +303,7 @@ Table of Contents
    retransmits, and ensures forward progress without relying on
    timeouts.
 
-4.6.  Explicit Correction For Delayed Acknowledgements
+4.6.  Explicit Correction For Delayed Acknowledgments
 
    QUIC endpoints measure the delay incurred between when a packet is
    received and when the corresponding acknowledgment is sent, allowing
@@ -554,9 +554,9 @@ Table of Contents
    control are properties of the path, whereas loss detection also
    relies upon key availability.
 
-6.1.  Acknowledgement-Based Detection
+6.1.  Acknowledgment-Based Detection
 
-   Acknowledgement-based loss detection implements the spirit of TCP's
+   Acknowledgment-based loss detection implements the spirit of TCP's
    Fast Retransmit ([RFC5681]), Early Retransmit ([RFC5827]), FACK
    ([FACK]), SACK loss recovery ([RFC6675]), and RACK ([RACK]).  This
    section provides an overview of how these algorithms are implemented
@@ -1285,7 +1285,7 @@ Table of Contents
 8.2.  Traffic Analysis
 
    Packets that carry only ACK frames can be heuristically identified by
-   observing packet size.  Acknowledgement patterns may expose
+   observing packet size.  Acknowledgment patterns may expose
    information about link characteristics or application behavior.  To
    reduce leaked information, endpoints can bundle acknowledgments with
    other frames, or they can use PADDING frames at a potential cost to
@@ -1356,7 +1356,7 @@ Table of Contents
 
 10.2.  Informative References
 
-   [FACK]     Mathis, M. and J. Mahdavi, "Forward Acknowledgement:
+   [FACK]     Mathis, M. and J. Mahdavi, "Forward Acknowledgment:
               Refining TCP Congestion Control", ACM SIGCOMM , August
               1996.
 
@@ -1944,7 +1944,7 @@ B.4.  On Packet Sent
    OnPacketSentCC(sent_bytes):
      bytes_in_flight += sent_bytes
 
-B.5.  On Packet Acknowledgement
+B.5.  On Packet Acknowledgment
 
    Invoked from loss detection's OnAckReceived and is supplied with the
    newly acked_packets from sent_packets.

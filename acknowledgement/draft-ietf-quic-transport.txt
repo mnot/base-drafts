@@ -164,9 +164,9 @@ Table of Contents
      12.5.  Frames and Number Spaces
    13. Packetization and Reliability
      13.1.  Packet Processing
-     13.2.  Generating Acknowledgements
+     13.2.  Generating Acknowledgments
        13.2.1.  Sending ACK Frames
-       13.2.2.  Acknowledgement Frequency
+       13.2.2.  Acknowledgment Frequency
        13.2.3.  Managing ACK Ranges
        13.2.4.  Limiting Ranges by Tracking ACK Frames
        13.2.5.  Measuring and Reporting Host Delay
@@ -4122,7 +4122,7 @@ Table of Contents
    did not send as a connection error of type PROTOCOL_VIOLATION, if it
    is able to detect the condition.
 
-13.2.  Generating Acknowledgements
+13.2.  Generating Acknowledgments
 
    Endpoints acknowledge all packets they receive and process.  However,
    only ack-eliciting packets cause an ACK frame to be sent within the
@@ -4205,7 +4205,7 @@ Table of Contents
    would otherwise be non-ack-eliciting, to avoid an infinite feedback
    loop of acknowledgments.
 
-13.2.2.  Acknowledgement Frequency
+13.2.2.  Acknowledgment Frequency
 
    A receiver determines how frequently to send acknowledgments in
    response to ack-eliciting packets.  This determination involves a

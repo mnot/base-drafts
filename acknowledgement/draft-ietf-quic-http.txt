@@ -177,7 +177,7 @@ Table of Contents
      B.31. Since draft-ietf-quic-http-01
      B.32. Since draft-ietf-quic-http-00
      B.33. Since draft-shade-quic-http2-mapping-00
-   Acknowledgements
+   Acknowledgments
    Author's Address
 
 1.  Introduction
@@ -3322,7 +3322,7 @@ B.33.  Since draft-shade-quic-http2-mapping-00
 
    *  Updated authors/editors list
 
-Acknowledgements
+Acknowledgments
 
    The original authors of this specification were Robbie Shade and Mike
    Warres.
