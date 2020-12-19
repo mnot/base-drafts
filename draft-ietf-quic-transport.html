@@ -1262,13 +1262,13 @@ code and issues list for this draft can be found at
                 <p id="section-toc.1-1.13.2.1.1"><a href="#section-13.1" class="xref">13.1</a>.  <a href="#name-packet-processing" class="xref">Packet Processing</a><a href="#section-toc.1-1.13.2.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="compact ulEmpty toc" id="section-toc.1-1.13.2.2">
-                <p id="section-toc.1-1.13.2.2.1"><a href="#section-13.2" class="xref">13.2</a>.  <a href="#name-generating-acknowledgements" class="xref">Generating Acknowledgements</a><a href="#section-toc.1-1.13.2.2.1" class="pilcrow">¶</a></p>
+                <p id="section-toc.1-1.13.2.2.1"><a href="#section-13.2" class="xref">13.2</a>.  <a href="#name-generating-acknowledgments" class="xref">Generating Acknowledgments</a><a href="#section-toc.1-1.13.2.2.1" class="pilcrow">¶</a></p>
 <ul class="compact ulEmpty toc">
 <li class="compact ulEmpty toc" id="section-toc.1-1.13.2.2.2.1">
                     <p id="section-toc.1-1.13.2.2.2.1.1"><a href="#section-13.2.1" class="xref">13.2.1</a>.  <a href="#name-sending-ack-frames" class="xref">Sending ACK Frames</a><a href="#section-toc.1-1.13.2.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
                   <li class="compact ulEmpty toc" id="section-toc.1-1.13.2.2.2.2">
-                    <p id="section-toc.1-1.13.2.2.2.2.1"><a href="#section-13.2.2" class="xref">13.2.2</a>.  <a href="#name-acknowledgement-frequency" class="xref">Acknowledgement Frequency</a><a href="#section-toc.1-1.13.2.2.2.2.1" class="pilcrow">¶</a></p>
+                    <p id="section-toc.1-1.13.2.2.2.2.1"><a href="#section-13.2.2" class="xref">13.2.2</a>.  <a href="#name-acknowledgment-frequency" class="xref">Acknowledgment Frequency</a><a href="#section-toc.1-1.13.2.2.2.2.1" class="pilcrow">¶</a></p>
 </li>
                   <li class="compact ulEmpty toc" id="section-toc.1-1.13.2.2.2.3">
                     <p id="section-toc.1-1.13.2.2.2.3.1"><a href="#section-13.2.3" class="xref">13.2.3</a>.  <a href="#name-managing-ack-ranges" class="xref">Managing ACK Ranges</a><a href="#section-toc.1-1.13.2.2.2.3.1" class="pilcrow">¶</a></p>
@@ -1842,7 +1842,7 @@ handling.<a href="#section-1.1-2.2.2.7" class="pilcrow">¶</a>
 </li>
               <li class="normal" id="section-1.1-2.3.2.2">
                 <a href="#packetization" class="xref">Section 13</a> defines models for the transmission, retransmission, and
-acknowledgement of data, and<a href="#section-1.1-2.3.2.2" class="pilcrow">¶</a>
+acknowledgment of data, and<a href="#section-1.1-2.3.2.2" class="pilcrow">¶</a>
 </li>
               <li class="normal" id="section-1.1-2.3.2.3">
                 <a href="#datagram-size" class="xref">Section 14</a> specifies rules for managing the size of datagrams
@@ -1934,7 +1934,7 @@ Ack-eliciting Packet:  </dt>
           <dd style="margin-left: 1.5em" id="section-1.2-3.12">
             <p id="section-1.2-3.12.1">A QUIC packet that contains frames other than ACK, PADDING, and
 CONNECTION_CLOSE. These cause a recipient to send an acknowledgment; see
-<a href="#sending-acknowledgements" class="xref">Section 13.2.1</a>.<a href="#section-1.2-3.12.1" class="pilcrow">¶</a></p>
+<a href="#sending-acknowledgments" class="xref">Section 13.2.1</a>.<a href="#section-1.2-3.12.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-1.2-3.13">
@@ -3807,7 +3807,7 @@ send more data prior to completing address validation.<a href="#section-8.1-5" c
 <p id="section-8.1-6">Loss of an Initial or Handshake packet from the server can cause a deadlock if
 the client does not send additional Initial or Handshake packets. A deadlock
 could occur when the server reaches its anti-amplification limit and the client
-has received acknowledgements for all the data it has sent.  In this case, when
+has received acknowledgments for all the data it has sent.  In this case, when
 the client has no reason to send additional packets, the server will be unable
 to send more data because it has not validated the client's address. To prevent
 this deadlock, clients MUST send a packet on a probe timeout (PTO, see Section
@@ -5699,8 +5699,8 @@ the condition.<a href="#section-13.1-3" class="pilcrow">¶</a></p>
 </div>
 <div id="generating-acks">
 <section id="section-13.2">
-        <h3 id="name-generating-acknowledgements">
-<a href="#section-13.2" class="section-number selfRef">13.2. </a><a href="#name-generating-acknowledgements" class="section-name selfRef">Generating Acknowledgements</a>
+        <h3 id="name-generating-acknowledgments">
+<a href="#section-13.2" class="section-number selfRef">13.2. </a><a href="#name-generating-acknowledgments" class="section-name selfRef">Generating Acknowledgments</a>
         </h3>
 <p id="section-13.2-1">Endpoints acknowledge all packets they receive and process. However, only
 ack-eliciting packets cause an ACK frame to be sent within the maximum ack
@@ -5713,7 +5713,7 @@ detection at the peer.<a href="#section-13.2-2" class="pilcrow">¶</a></p>
 response, but this has to be balanced against excessive load generated by a
 receiver that sends an ACK frame in response to every ack-eliciting packet.  The
 guidance offered below seeks to strike this balance.<a href="#section-13.2-3" class="pilcrow">¶</a></p>
-<div id="sending-acknowledgements">
+<div id="sending-acknowledgments">
 <section id="section-13.2.1">
           <h4 id="name-sending-ack-frames">
 <a href="#section-13.2.1" class="section-number selfRef">13.2.1. </a><a href="#name-sending-ack-frames" class="section-name selfRef">Sending ACK Frames</a>
@@ -5739,7 +5739,7 @@ endpoint MUST NOT send more than one such packet in response to receiving an
 ack-eliciting packet.<a href="#section-13.2.1-3" class="pilcrow">¶</a></p>
 <p id="section-13.2.1-4">An endpoint MUST NOT send a non-ack-eliciting packet in response to a
 non-ack-eliciting packet, even if there are packet gaps that precede the
-received packet. This avoids an infinite feedback loop of acknowledgements,
+received packet. This avoids an infinite feedback loop of acknowledgments,
 which could prevent the connection from ever becoming idle.  Non-ack-eliciting
 packets are eventually acknowledged when the endpoint sends an ACK frame in
 response to other events.<a href="#section-13.2.1-4" class="pilcrow">¶</a></p>
@@ -5764,7 +5764,7 @@ should only deviate from these requirements after careful consideration of the
 performance implications of a change, for connections made by the endpoint and
 for other users of the network.<a href="#section-13.2.1-8" class="pilcrow">¶</a></p>
 <p id="section-13.2.1-9">An endpoint that is only sending ACK frames will not receive acknowledgments
-from its peer unless those acknowledgements are included in packets with
+from its peer unless those acknowledgments are included in packets with
 ack-eliciting frames.  An endpoint SHOULD send an ACK frame with other frames
 when there are new ack-eliciting packets to acknowledge.  When only
 non-ack-eliciting packets need to be acknowledged, an endpoint MAY wait until an
@@ -5772,15 +5772,15 @@ ack-eliciting packet has been received to include an ACK frame with outgoing
 frames.<a href="#section-13.2.1-9" class="pilcrow">¶</a></p>
 <p id="section-13.2.1-10">A receiver MUST NOT send an ack-eliciting frame in all packets that would
 otherwise be non-ack-eliciting, to avoid an infinite feedback loop of
-acknowledgements.<a href="#section-13.2.1-10" class="pilcrow">¶</a></p>
+acknowledgments.<a href="#section-13.2.1-10" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="acknowledgement-frequency">
+<div id="acknowledgment-frequency">
 <section id="section-13.2.2">
-          <h4 id="name-acknowledgement-frequency">
-<a href="#section-13.2.2" class="section-number selfRef">13.2.2. </a><a href="#name-acknowledgement-frequency" class="section-name selfRef">Acknowledgement Frequency</a>
+          <h4 id="name-acknowledgment-frequency">
+<a href="#section-13.2.2" class="section-number selfRef">13.2.2. </a><a href="#name-acknowledgment-frequency" class="section-name selfRef">Acknowledgment Frequency</a>
           </h4>
-<p id="section-13.2.2-1">A receiver determines how frequently to send acknowledgements in response to
+<p id="section-13.2.2-1">A receiver determines how frequently to send acknowledgments in response to
 ack-eliciting packets. This determination involves a trade-off.<a href="#section-13.2.2-1" class="pilcrow">¶</a></p>
 <p id="section-13.2.2-2">Endpoints rely on timely acknowledgment to detect loss; see Section 6 of
 <span>[<a href="#QUIC-RECOVERY" class="xref">QUIC-RECOVERY</a>]</span>. Window-based congestion controllers, such as the one in
@@ -5788,7 +5788,7 @@ Section 7 of <span>[<a href="#QUIC-RECOVERY" class="xref">QUIC-RECOVERY</a>]</sp
 congestion window. In both cases, delaying acknowledgments can adversely affect
 performance.<a href="#section-13.2.2-2" class="pilcrow">¶</a></p>
 <p id="section-13.2.2-3">On the other hand, reducing the frequency of packets that carry only
-acknowledgements reduces packet transmission and processing cost at both
+acknowledgments reduces packet transmission and processing cost at both
 endpoints. It can improve connection throughput on severely asymmetric links
 and reduce the volume of acknowledgment traffic using return path capacity;
 see Section 3 of <span>[<a href="#RFC3449" class="xref">RFC3449</a>]</span>.<a href="#section-13.2.2-3" class="pilcrow">¶</a></p>
@@ -5808,7 +5808,7 @@ send an ACK frame in response.<a href="#section-13.2.2-5" class="pilcrow">¶</a>
 <a href="#section-13.2.3" class="section-number selfRef">13.2.3. </a><a href="#name-managing-ack-ranges" class="section-name selfRef">Managing ACK Ranges</a>
           </h4>
 <p id="section-13.2.3-1">When an ACK frame is sent, one or more ranges of acknowledged packets are
-included.  Including acknowledgements for older packets reduces the chance of
+included.  Including acknowledgments for older packets reduces the chance of
 spurious retransmissions caused by losing previously sent ACK frames, at the
 cost of larger ACK frames.<a href="#section-13.2.3-1" class="pilcrow">¶</a></p>
 <p id="section-13.2.3-2">ACK frames SHOULD always acknowledge the most recently received packets, and the
@@ -5821,7 +5821,7 @@ to fit within a single QUIC packet.  If it does not, then older ranges
 sends in ACK frames, both to limit the size of ACK frames and to avoid resource
 exhaustion. After receiving acknowledgments for an ACK frame, the receiver
 SHOULD stop tracking those acknowledged ACK Ranges.  Senders can expect
-acknowledgements for most packets, but QUIC does not guarantee receipt of an
+acknowledgments for most packets, but QUIC does not guarantee receipt of an
 acknowledgment for every packet that the receiver processes.<a href="#section-13.2.3-3" class="pilcrow">¶</a></p>
 <p id="section-13.2.3-4">It is possible that retaining many ACK Ranges could cause an ACK frame to become
 too large. A receiver can discard unacknowledged ACK Ranges to limit ACK frame
@@ -5857,14 +5857,14 @@ frame can be saved.  When a packet containing an ACK frame is acknowledged, the
 receiver can stop acknowledging packets less than or equal to the largest
 acknowledged in the sent ACK frame.<a href="#section-13.2.4-1" class="pilcrow">¶</a></p>
 <p id="section-13.2.4-2">A receiver that sends only non-ack-eliciting packets, such as ACK frames, might
-not receive an acknowledgement for a long period of time.  This could cause the
+not receive an acknowledgment for a long period of time.  This could cause the
 receiver to maintain state for a large number of ACK frames for a long period of
 time, and ACK frames it sends could be unnecessarily large.  In such a case, a
 receiver could send a PING or other small ack-eliciting frame occasionally,
 such as once per round trip, to elicit an ACK from the peer.<a href="#section-13.2.4-2" class="pilcrow">¶</a></p>
 <p id="section-13.2.4-3">In cases without ACK frame loss, this algorithm allows for a minimum of 1 RTT of
 reordering. In cases with ACK frame loss and reordering, this approach does not
-guarantee that every acknowledgement is seen by the sender before it is no
+guarantee that every acknowledgment is seen by the sender before it is no
 longer included in the ACK frame. Packets could be received out of order and all
 subsequent ACK frames containing them could be lost. In this case, the loss
 recovery algorithm could cause spurious retransmissions, but the sender will
@@ -5878,7 +5878,7 @@ continue making forward progress.<a href="#section-13.2.4-3" class="pilcrow">¶<
           </h4>
 <p id="section-13.2.5-1">An endpoint measures the delays intentionally introduced between the time the
 packet with the largest packet number is received and the time an acknowledgment
-is sent.  The endpoint encodes this acknowledgement delay in the ACK Delay field
+is sent.  The endpoint encodes this acknowledgment delay in the ACK Delay field
 of an ACK frame; see <a href="#frame-ack" class="xref">Section 19.3</a>.  This allows the receiver of the ACK frame
 to adjust for any intentional delays, which is important for getting a better
 estimate of the path RTT when acknowledgments are delayed.<a href="#section-13.2.5-1" class="pilcrow">¶</a></p>
@@ -5887,10 +5887,10 @@ processed.  An endpoint MUST NOT include delays that it does not control when
 populating the ACK Delay field in an ACK frame. However, endpoints SHOULD
 include buffering delays caused by unavailability of decryption keys, since
 these delays can be large and are likely to be non-repeating.<a href="#section-13.2.5-2" class="pilcrow">¶</a></p>
-<p id="section-13.2.5-3">When the measured acknowledgement delay is larger than its max_ack_delay, an
+<p id="section-13.2.5-3">When the measured acknowledgment delay is larger than its max_ack_delay, an
 endpoint SHOULD report the measured delay. This information is especially useful
 during the handshake when delays might be large; see
-<a href="#sending-acknowledgements" class="xref">Section 13.2.1</a>.<a href="#section-13.2.5-3" class="pilcrow">¶</a></p>
+<a href="#sending-acknowledgments" class="xref">Section 13.2.1</a>.<a href="#section-13.2.5-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="ack-frames-and-packet-protection">
@@ -5947,9 +5947,9 @@ corresponding packet number space are discarded.<a href="#section-13.3-3.1" clas
 unless the endpoint has sent a RESET_STREAM for that stream.  Once an endpoint
 sends a RESET_STREAM frame, no further STREAM frames are needed.<a href="#section-13.3-3.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-13.3-3.3">ACK frames carry the most recent set of acknowledgements and the
-acknowledgement delay from the largest acknowledged packet, as described in
-<a href="#sending-acknowledgements" class="xref">Section 13.2.1</a>. Delaying the transmission of packets containing
+          <li class="normal" id="section-13.3-3.3">ACK frames carry the most recent set of acknowledgments and the
+acknowledgment delay from the largest acknowledged packet, as described in
+<a href="#sending-acknowledgments" class="xref">Section 13.2.1</a>. Delaying the transmission of packets containing
 ACK frames or resending old ACK frames can cause the peer to generate an
 inflated RTT sample or unnecessarily disable ECN.<a href="#section-13.3-3.3" class="pilcrow">¶</a>
 </li>
@@ -6073,7 +6073,7 @@ for this connection.<a href="#section-13.4.1-2" class="pilcrow">¶</a></p>
 ECN-enabled endpoint accesses the ECN field and increases the corresponding
 ECT(0), ECT(1), or CE count. These ECN counts are included in subsequent ACK
 frames; see <a href="#generating-acks" class="xref">Section 13.2</a> and <a href="#frame-ack" class="xref">Section 19.3</a>.<a href="#section-13.4.1-3" class="pilcrow">¶</a></p>
-<p id="section-13.4.1-4">Each packet number space maintains separate acknowledgement state and separate
+<p id="section-13.4.1-4">Each packet number space maintains separate acknowledgment state and separate
 ECN counts.  Coalesced QUIC packets (see <a href="#packet-coalesce" class="xref">Section 12.2</a>) share the same IP
 header so the ECN counts are incremented once for each coalesced QUIC packet.<a href="#section-13.4.1-4" class="pilcrow">¶</a></p>
 <p id="section-13.4.1-5">For example, if one each of an Initial, Handshake, and 1-RTT QUIC packet are
@@ -6140,7 +6140,7 @@ with an ECT(0) marking.  Similarly, ECN validation fails if the sum of the
 increases to ECT(1) and ECN-CE counts is less than the number of newly
 acknowledged packets sent with an ECT(1) marking.  These checks can detect
 remarking of ECN-CE markings by the network.<a href="#section-13.4.2.1-3" class="pilcrow">¶</a></p>
-<p id="section-13.4.2.1-4">An endpoint could miss acknowledgements for a packet when ACK frames are lost.
+<p id="section-13.4.2.1-4">An endpoint could miss acknowledgments for a packet when ACK frames are lost.
 It is therefore possible for the total increase in ECT(0), ECT(1), and ECN-CE
 counts to be greater than the number of packets that are newly acknowledged by
 an ACK frame. This is why ECN counts are permitted to be larger than the total
@@ -6513,9 +6513,9 @@ number of bits required to represent the packet number is reduced by including
 only the least significant bits of the packet number.<a href="#section-17.1-1" class="pilcrow">¶</a></p>
 <p id="section-17.1-2">The encoded packet number is protected as described in Section 5.4 of
 <span>[<a href="#QUIC-TLS" class="xref">QUIC-TLS</a>]</span>.<a href="#section-17.1-2" class="pilcrow">¶</a></p>
-<p id="section-17.1-3">Prior to receiving an acknowledgement for a packet number space, the full packet
+<p id="section-17.1-3">Prior to receiving an acknowledgment for a packet number space, the full packet
 number MUST be included; it is not to be truncated as described below.<a href="#section-17.1-3" class="pilcrow">¶</a></p>
-<p id="section-17.1-4">After an acknowledgement is received for a packet number space, the sender MUST
+<p id="section-17.1-4">After an acknowledgment is received for a packet number space, the sender MUST
 use a packet number size able to represent more than twice as large a range than
 the difference between the largest acknowledged packet and packet number being
 sent.  A peer receiving the packet will then correctly decode the packet number,
@@ -7514,7 +7514,7 @@ the corresponding type with the same value.<a href="#section-18.2-4.24.1" class=
 <dt id="section-18.2-4.25">
 ack_delay_exponent (0x0a):  </dt>
           <dd style="margin-left: 1.5em" id="section-18.2-4.26">
-            <p id="section-18.2-4.26.1">The acknowledgement delay exponent is an integer value indicating an exponent
+            <p id="section-18.2-4.26.1">The acknowledgment delay exponent is an integer value indicating an exponent
 used to decode the ACK Delay field in the ACK frame (<a href="#frame-ack" class="xref">Section 19.3</a>). If this
 value is absent, a default value of 3 is assumed (indicating a multiplier of
 8). Values above 20 are invalid.<a href="#section-18.2-4.26.1" class="pilcrow">¶</a></p>
@@ -7523,7 +7523,7 @@ value is absent, a default value of 3 is assumed (indicating a multiplier of
 <dt id="section-18.2-4.27">
 max_ack_delay (0x0b):  </dt>
           <dd style="margin-left: 1.5em" id="section-18.2-4.28">
-            <p id="section-18.2-4.28.1">The maximum acknowledgement delay is an integer value indicating the maximum
+            <p id="section-18.2-4.28.1">The maximum acknowledgment delay is an integer value indicating the maximum
 amount of time in milliseconds by which the endpoint will delay sending
 acknowledgments.  This value SHOULD include the receiver's expected delays in
 alarms firing.  For example, if a receiver sets a timer for 5ms and alarms
@@ -7731,7 +7731,7 @@ also contain the sum of QUIC packets with associated ECN marks received on the
 connection up until this point.  QUIC implementations MUST properly handle both
 types and, if they have enabled ECN for packets they send, they SHOULD use the
 information in the ECN section to manage their congestion state.<a href="#section-19.3-1" class="pilcrow">¶</a></p>
-<p id="section-19.3-2">QUIC acknowledgements are irrevocable.  Once acknowledged, a packet remains
+<p id="section-19.3-2">QUIC acknowledgments are irrevocable.  Once acknowledged, a packet remains
 acknowledged, even if it does not appear in a future ACK frame.  This is unlike
 reneging for TCP SACKs (<span>[<a href="#RFC2018" class="xref">RFC2018</a>]</span>).<a href="#section-19.3-2" class="pilcrow">¶</a></p>
 <p id="section-19.3-3">Packets from different packet number spaces can be identified using the same
@@ -7776,7 +7776,7 @@ QUIC long or short header, the value in an ACK frame is not truncated.<a href="#
 <dt id="section-19.3-8.3">
 ACK Delay:  </dt>
           <dd style="margin-left: 1.5em" id="section-19.3-8.4">
-            <p id="section-19.3-8.4.1">A variable-length integer encoding the acknowledgement delay in
+            <p id="section-19.3-8.4.1">A variable-length integer encoding the acknowledgment delay in
 microseconds; see <a href="#host-delay" class="xref">Section 13.2.5</a>. It is decoded by multiplying the
 value in the field by 2 to the power of the ack_delay_exponent transport
 parameter sent by the sender of the ACK frame; see

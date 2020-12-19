@@ -70,7 +70,7 @@ Table of Contents
      4.3.  Clearer Loss Epoch
      4.4.  No Reneging
      4.5.  More ACK Ranges
-     4.6.  Explicit Correction For Delayed Acknowledgements
+     4.6.  Explicit Correction For Delayed Acknowledgments
      4.7.  Probe Timeout Replaces RTO and TLP
      4.8.  The Minimum Congestion Window is Two Packets
    5.  Estimating the Round-Trip Time
@@ -78,7 +78,7 @@ Table of Contents
      5.2.  Estimating min_rtt
      5.3.  Estimating smoothed_rtt and rttvar
    6.  Loss Detection
-     6.1.  Acknowledgement-Based Detection
+     6.1.  Acknowledgment-Based Detection
        6.1.1.  Packet Threshold
        6.1.2.  Time Threshold
      6.2.  Probe Timeout
@@ -129,7 +129,7 @@ Table of Contents
      B.2.  Variables of interest
      B.3.  Initialization
      B.4.  On Packet Sent
-     B.5.  On Packet Acknowledgement
+     B.5.  On Packet Acknowledgment
      B.6.  On New Congestion Event
      B.7.  Process ECN Information
      B.8.  On Packets Lost
@@ -192,7 +192,7 @@ Table of Contents
       CONNECTION_CLOSE are considered ack-eliciting.
 
    Ack-eliciting packets:  Packets that contain ack-eliciting frames
-      elicit an ACK from the receiver within the maximum acknowledgement
+      elicit an ACK from the receiver within the maximum acknowledgment
       delay and are called ack-eliciting packets.
 
    In-flight packets:  Packets are considered in-flight when they are
@@ -227,7 +227,7 @@ Table of Contents
 
    *  Long header packets that contain CRYPTO frames are critical to the
       performance of the QUIC handshake and use shorter timers for
-      acknowledgement.
+      acknowledgment.
 
    *  Packets containing frames besides ACK or CONNECTION_CLOSE frames
       count toward congestion control limits and are considered in-
@@ -248,7 +248,7 @@ Table of Contents
 
    QUIC uses separate packet number spaces for each encryption level,
    except 0-RTT and all generations of 1-RTT keys use the same packet
-   number space.  Separate packet number spaces ensures acknowledgement
+   number space.  Separate packet number spaces ensures acknowledgment
    of packets sent with one level of encryption will not cause spurious
    retransmission of packets sent with a different encryption level.
    Congestion control and round-trip time (RTT) measurement are unified
@@ -303,7 +303,7 @@ Table of Contents
    retransmits, and ensures forward progress without relying on
    timeouts.
 
-4.6.  Explicit Correction For Delayed Acknowledgements
+4.6.  Explicit Correction For Delayed Acknowledgments
 
    QUIC endpoints measure the delay incurred between when a packet is
    received and when the corresponding acknowledgment is sent, allowing
@@ -314,7 +314,7 @@ Table of Contents
 
    QUIC uses a probe timeout (PTO; see Section 6.2), with a timer based
    on TCP's RTO computation.  QUIC's PTO includes the peer's maximum
-   expected acknowledgement delay instead of using a fixed minimum
+   expected acknowledgment delay instead of using a fixed minimum
    timeout.  QUIC does not collapse the congestion window until
    persistent congestion (Section 7.6) is declared, unlike TCP, which
    collapses the congestion window upon expiry of an RTO.  Instead of
@@ -344,7 +344,7 @@ Table of Contents
    (Section 6.2) to recover, which can be much longer than a round-trip
    time.  Sending a single ack-eliciting packet also increases the
    chances of incurring additional latency when a receiver delays its
-   acknowledgement.
+   acknowledgment.
 
    QUIC therefore recommends that the minimum congestion window be two
    packets.  While this increases network load, it is considered safe,
@@ -393,7 +393,7 @@ Table of Contents
    does not newly acknowledge at least one ack-eliciting packet.  A peer
    usually does not send an ACK frame when only non-ack-eliciting
    packets are received.  Therefore an ACK frame that contains
-   acknowledgements for only non-ack-eliciting packets could include an
+   acknowledgments for only non-ack-eliciting packets could include an
    arbitrarily large ACK Delay value.  Ignoring such ACK frames avoids
    complications in subsequent smoothed_rtt and rttvar computations.
 
@@ -434,8 +434,8 @@ Table of Contents
    incorrectly declared.
 
    Endpoints MAY re-establish the min_rtt at other times in the
-   connection, such as when traffic volume is low and an acknowledgement
-   is received with a low acknowledgement delay.  Implementations SHOULD
+   connection, such as when traffic volume is low and an acknowledgment
+   is received with a low acknowledgment delay.  Implementations SHOULD
    NOT refresh the min_rtt value too often, since the actual minimum RTT
    of the path is not frequently observable.
 
@@ -446,56 +446,55 @@ Table of Contents
    samples, estimated using a mean variation.
 
    The calculation of smoothed_rtt uses RTT samples after adjusting them
-   for acknowledgement delays.  These delays are decoded from the ACK
+   for acknowledgment delays.  These delays are decoded from the ACK
    Delay field of ACK frames as described in Section 19.3 of
    [QUIC-TRANSPORT].
 
-   The peer might report acknowledgement delays that are larger than the
+   The peer might report acknowledgment delays that are larger than the
    peer's max_ack_delay during the handshake (Section 13.2.1 of
    [QUIC-TRANSPORT]).  To account for this, the endpoint SHOULD ignore
    max_ack_delay until the handshake is confirmed (Section 4.1.2 of
-   [QUIC-TLS]).  When they occur, these large acknowledgement delays are
+   [QUIC-TLS]).  When they occur, these large acknowledgment delays are
    likely to be non-repeating and limited to the handshake.  The
    endpoint can therefore use them without limiting them to the
    max_ack_delay, avoiding unnecessary inflation of the RTT estimate.
 
-   Note however that a large acknowledgement delay can result in a
+   Note however that a large acknowledgment delay can result in a
    substantially inflated smoothed_rtt, if there is either an error in
-   the peer's reporting of the acknowledgement delay or in the
-   endpoint's min_rtt estimate.  Therefore, prior to handshake
-   confirmation, an endpoint MAY ignore RTT samples if adjusting the RTT
-   sample for acknowledgement delay causes the sample to be less than
-   the min_rtt.
+   the peer's reporting of the acknowledgment delay or in the endpoint's
+   min_rtt estimate.  Therefore, prior to handshake confirmation, an
+   endpoint MAY ignore RTT samples if adjusting the RTT sample for
+   acknowledgment delay causes the sample to be less than the min_rtt.
 
-   After the handshake is confirmed, any acknowledgement delays reported
+   After the handshake is confirmed, any acknowledgment delays reported
    by the peer that are greater than the peer's max_ack_delay are
    attributed to unintentional but potentially repeating delays, such as
-   scheduler latency at the peer or loss of previous acknowledgements.
+   scheduler latency at the peer or loss of previous acknowledgments.
    Excess delays could also be due to a non-compliant receiver.
    Therefore, these extra delays are considered effectively part of path
    delay and incorporated into the RTT estimate.
 
    Therefore, when adjusting an RTT sample using peer-reported
-   acknowledgement delays, an endpoint:
+   acknowledgment delays, an endpoint:
 
-   *  MAY ignore the acknowledgement delay for Initial packets, since
-      these acknowledgements are not delayed by the peer (Section 13.2.1
+   *  MAY ignore the acknowledgment delay for Initial packets, since
+      these acknowledgments are not delayed by the peer (Section 13.2.1
       of [QUIC-TRANSPORT]);
 
    *  SHOULD ignore the peer's max_ack_delay until the handshake is
       confirmed;
 
-   *  MUST use the lesser of the acknowledgement delay and the peer's
+   *  MUST use the lesser of the acknowledgment delay and the peer's
       max_ack_delay after the handshake is confirmed; and
 
-   *  MUST NOT subtract the acknowledgement delay from the RTT sample if
+   *  MUST NOT subtract the acknowledgment delay from the RTT sample if
       the resulting value is smaller than the min_rtt.  This limits the
       underestimation of the smoothed_rtt due to a misreporting peer.
 
    Additionally, an endpoint might postpone the processing of
-   acknowledgements when the corresponding decryption keys are not
+   acknowledgments when the corresponding decryption keys are not
    immediately available.  For example, a client might receive an
-   acknowledgement for a 0-RTT packet that it cannot decrypt because
+   acknowledgment for a 0-RTT packet that it cannot decrypt because
    1-RTT packet protection keys are not yet available to it.  In such
    cases, an endpoint SHOULD subtract such local delays from its RTT
    sample until the handshake is confirmed.
@@ -529,7 +528,7 @@ Table of Contents
 
    On subsequent RTT samples, smoothed_rtt and rttvar evolve as follows:
 
-   ack_delay = decoded acknowledgement delay from ACK frame
+   ack_delay = decoded acknowledgment delay from ACK frame
    if (handshake confirmed):
      ack_delay = min(ack_delay, max_ack_delay)
    adjusted_rtt = latest_rtt
@@ -541,8 +540,8 @@ Table of Contents
 
 6.  Loss Detection
 
-   QUIC senders use acknowledgements to detect lost packets, and a probe
-   time out (see Section 6.2) to ensure acknowledgements are received.
+   QUIC senders use acknowledgments to detect lost packets, and a probe
+   time out (see Section 6.2) to ensure acknowledgments are received.
    This section provides a description of these algorithms.
 
    If a packet is lost, the QUIC transport needs to recover from that
@@ -555,9 +554,9 @@ Table of Contents
    control are properties of the path, whereas loss detection also
    relies upon key availability.
 
-6.1.  Acknowledgement-Based Detection
+6.1.  Acknowledgment-Based Detection
 
-   Acknowledgement-based loss detection implements the spirit of TCP's
+   Acknowledgment-based loss detection implements the spirit of TCP's
    Fast Retransmit ([RFC5681]), Early Retransmit ([RFC5827]), FACK
    ([FACK]), SACK loss recovery ([RFC6675]), and RACK ([RACK]).  This
    section provides an overview of how these algorithms are implemented
@@ -572,7 +571,7 @@ Table of Contents
       acknowledged packet (Section 6.1.1), or it was sent long enough in
       the past (Section 6.1.2).
 
-   The acknowledgement indicates that a packet sent later was delivered,
+   The acknowledgment indicates that a packet sent later was delivered,
    and the packet and time thresholds provide some tolerance for packet
    reordering.
 
@@ -620,8 +619,7 @@ Table of Contents
    cases:
 
    *  the latest RTT sample is lower than the smoothed RTT, perhaps due
-      to reordering where the acknowledgement encountered a shorter
-      path;
+      to reordering where the acknowledgment encountered a shorter path;
 
    *  the latest RTT sample is higher than the smoothed RTT, perhaps due
       to a sustained increase in the actual RTT, but the smoothed RTT
@@ -647,14 +645,14 @@ Table of Contents
    when ack-eliciting packets are not acknowledged within the expected
    period of time or the server may not have validated the client's
    address.  A PTO enables a connection to recover from loss of tail
-   packets or acknowledgements.
+   packets or acknowledgments.
 
    As with loss detection, the probe timeout is per packet number space.
    That is, a PTO value is computed per packet number space.
 
    A PTO timer expiration event does not indicate packet loss and MUST
    NOT cause prior unacknowledged packets to be marked as lost.  When an
-   acknowledgement is received that newly acknowledges packets, loss
+   acknowledgment is received that newly acknowledges packets, loss
    detection proceeds as dictated by packet and time threshold
    mechanisms; see Section 6.1.
 
@@ -671,10 +669,10 @@ Table of Contents
    PTO = smoothed_rtt + max(4*rttvar, kGranularity) + max_ack_delay
 
    The PTO period is the amount of time that a sender ought to wait for
-   an acknowledgement of a sent packet.  This time period includes the
+   an acknowledgment of a sent packet.  This time period includes the
    estimated network roundtrip-time (smoothed_rtt), the variation in the
    estimate (4*rttvar), and max_ack_delay, to account for the maximum
-   time by which a receiver might delay sending an acknowledgement.
+   time by which a receiver might delay sending an acknowledgment.
 
    When the PTO is armed for Initial or Handshake packet number spaces,
    the max_ack_delay in the PTO period computation is set to 0, since
@@ -692,13 +690,12 @@ Table of Contents
    packet number space until the handshake is confirmed.  Doing so
    prevents the endpoint from retransmitting information in packets when
    either the peer does not yet have the keys to process them or the
-   endpoint does not yet have the keys to process their
-   acknowledgements.  For example, this can happen when a client sends
-   0-RTT packets to the server; it does so without knowing whether the
-   server will be able to decrypt them.  Similarly, this can happen when
-   a server sends 1-RTT packets before confirming that the client has
-   verified the server's certificate and can therefore read these 1-RTT
-   packets.
+   endpoint does not yet have the keys to process their acknowledgments.
+   For example, this can happen when a client sends 0-RTT packets to the
+   server; it does so without knowing whether the server will be able to
+   decrypt them.  Similarly, this can happen when a server sends 1-RTT
+   packets before confirming that the client has verified the server's
+   certificate and can therefore read these 1-RTT packets.
 
    A sender SHOULD restart its PTO timer every time an ack-eliciting
    packet is sent or acknowledged, when the handshake is confirmed
@@ -709,18 +706,18 @@ Table of Contents
 
    When a PTO timer expires, the PTO backoff MUST be increased,
    resulting in the PTO period being set to twice its current value.
-   The PTO backoff factor is reset when an acknowledgement is received,
+   The PTO backoff factor is reset when an acknowledgment is received,
    except in the following case.  A server might take longer to respond
    to packets during the handshake than otherwise.  To protect such a
    server from repeated client probes, the PTO backoff is not reset at a
    client that is not yet certain that the server has finished
    validating the client's address.  That is, a client does not reset
-   the PTO backoff factor on receiving acknowledgements in Initial
+   the PTO backoff factor on receiving acknowledgments in Initial
    packets.
 
    This exponential reduction in the sender's rate is important because
    consecutive PTOs might be caused by loss of packets or
-   acknowledgements due to severe congestion.  Even when there are ack-
+   acknowledgments due to severe congestion.  Even when there are ack-
    eliciting packets in-flight in multiple packet number spaces, the
    exponential increase in probe timeout occurs across all spaces to
    prevent excess load on the network.  For example, a timeout in the
@@ -773,7 +770,7 @@ Table of Contents
    unblock the server until it is certain that the server has finished
    its address validation (see Section 8 of [QUIC-TRANSPORT]).  That is,
    the client MUST set the probe timer if the client has not received an
-   acknowledgement for one of its Handshake packets and the handshake is
+   acknowledgment for one of its Handshake packets and the handshake is
    not confirmed (see Section 4.1.2 of [QUIC-TLS]), even if there are no
    packets in flight.  When the PTO fires, the client MUST send a
    Handshake packet if it has Handshake keys, otherwise it MUST send an
@@ -800,10 +797,10 @@ Table of Contents
 
    Endpoints can also use coalesced packets (see Section 12.2 of
    [QUIC-TRANSPORT]) to ensure that each datagram elicits at least one
-   acknowledgement.  For example, a client can coalesce an Initial
-   packet containing PING and PADDING frames with a 0-RTT data packet
-   and a server can coalesce an Initial packet containing a PING frame
-   with one or more packets in its first flight.
+   acknowledgment.  For example, a client can coalesce an Initial packet
+   containing PING and PADDING frames with a 0-RTT data packet and a
+   server can coalesce an Initial packet containing a PING frame with
+   one or more packets in its first flight.
 
 6.2.4.  Sending Probe Packets
 
@@ -822,7 +819,7 @@ Table of Contents
    and Application Data in-flight, because the peer might only have
    receive keys for one of the two packet number spaces.
 
-   If the sender wants to elicit a faster acknowledgement on PTO, it can
+   If the sender wants to elicit a faster acknowledgment on PTO, it can
    skip a packet number to eliminate the acknowledgment delay.
 
    When the PTO timer expires, an ack-eliciting packet MUST be sent.  An
@@ -881,7 +878,7 @@ Table of Contents
 
    When packet protection keys are discarded (see Section 4.9 of
    [QUIC-TLS]), all packets that were sent with those keys can no longer
-   be acknowledged because their acknowledgements cannot be processed
+   be acknowledged because their acknowledgments cannot be processed
    anymore.  The sender MUST discard all recovery state associated with
    those packets and MUST remove them from the count of bytes in flight.
 
@@ -1079,7 +1076,7 @@ Table of Contents
    flight, since these packets add network load without establishing
    packet loss.  Note that sending probe packets might cause the
    sender's bytes in flight to exceed the congestion window until an
-   acknowledgement is received that establishes loss or delivery of
+   acknowledgment is received that establishes loss or delivery of
    packets.
 
 7.6.  Persistent Congestion
@@ -1126,7 +1123,7 @@ Table of Contents
 7.6.2.  Establishing Persistent Congestion
 
    A sender establishes persistent congestion after the receipt of an
-   acknowledgement if two packets that are ack-eliciting are declared
+   acknowledgment if two packets that are ack-eliciting are declared
    lost, and:
 
    *  across all packet number spaces, none of the packets sent between
@@ -1170,35 +1167,35 @@ Table of Contents
 
    Consider the following sequence of events:
 
-                  +========+============================+
-                  | Time   | Action                     |
-                  +========+============================+
-                  | t=0    | Send packet #1 (app data)  |
-                  +--------+----------------------------+
-                  | t=1    | Send packet #2 (app data)  |
-                  +--------+----------------------------+
-                  | t=1.2  | Recv acknowledgement of #1 |
-                  +--------+----------------------------+
-                  | t=2    | Send packet #3 (app data)  |
-                  +--------+----------------------------+
-                  | t=3    | Send packet #4 (app data)  |
-                  +--------+----------------------------+
-                  | t=4    | Send packet #5 (app data)  |
-                  +--------+----------------------------+
-                  | t=5    | Send packet #6 (app data)  |
-                  +--------+----------------------------+
-                  | t=6    | Send packet #7 (app data)  |
-                  +--------+----------------------------+
-                  | t=8    | Send packet #8 (PTO 1)     |
-                  +--------+----------------------------+
-                  | t=12   | Send packet #9 (PTO 2)     |
-                  +--------+----------------------------+
-                  | t=12.2 | Recv acknowledgement of #9 |
-                  +--------+----------------------------+
+                  +========+===========================+
+                  | Time   | Action                    |
+                  +========+===========================+
+                  | t=0    | Send packet #1 (app data) |
+                  +--------+---------------------------+
+                  | t=1    | Send packet #2 (app data) |
+                  +--------+---------------------------+
+                  | t=1.2  | Recv acknowledgment of #1 |
+                  +--------+---------------------------+
+                  | t=2    | Send packet #3 (app data) |
+                  +--------+---------------------------+
+                  | t=3    | Send packet #4 (app data) |
+                  +--------+---------------------------+
+                  | t=4    | Send packet #5 (app data) |
+                  +--------+---------------------------+
+                  | t=5    | Send packet #6 (app data) |
+                  +--------+---------------------------+
+                  | t=6    | Send packet #7 (app data) |
+                  +--------+---------------------------+
+                  | t=8    | Send packet #8 (PTO 1)    |
+                  +--------+---------------------------+
+                  | t=12   | Send packet #9 (PTO 2)    |
+                  +--------+---------------------------+
+                  | t=12.2 | Recv acknowledgment of #9 |
+                  +--------+---------------------------+
 
-                                  Table 1
+                                 Table 1
 
-   Packets 2 through 8 are declared lost when the acknowledgement for
+   Packets 2 through 8 are declared lost when the acknowledgment for
    packet 9 is received at t = 12.2.
 
    The congestion period is calculated as the time between the oldest
@@ -1288,7 +1285,7 @@ Table of Contents
 8.2.  Traffic Analysis
 
    Packets that carry only ACK frames can be heuristically identified by
-   observing packet size.  Acknowledgement patterns may expose
+   observing packet size.  Acknowledgment patterns may expose
    information about link characteristics or application behavior.  To
    reduce leaked information, endpoints can bundle acknowledgments with
    other frames, or they can use PADDING frames at a potential cost to
@@ -1468,8 +1465,8 @@ A.1.1.  Sent Packet Fields
    packet_number:  The packet number of the sent packet.
 
    ack_eliciting:  A boolean that indicates whether a packet is ack-
-      eliciting.  If true, it is expected that an acknowledgement will
-      be received, though the peer could delay sending the ACK frame
+      eliciting.  If true, it is expected that an acknowledgment will be
+      received, though the peer could delay sending the ACK frame
       containing it by up to the max_ack_delay.
 
    in_flight:  A boolean that indicates whether the packet counts
@@ -1672,7 +1669,7 @@ A.7.  On Receiving an Acknowledgment
      min_rtt = min(min_rtt, latest_rtt)
      // Limit ack_delay by max_ack_delay after handshake
      // confirmation. Note that ack_delay is 0 for
-     // acknowledgements of Initial and Handshake packets.
+     // acknowledgments of Initial and Handshake packets.
      if (handshake confirmed):
        ack_delay = min(ack_delay, max_ack_delay)
 
@@ -1947,7 +1944,7 @@ B.4.  On Packet Sent
    OnPacketSentCC(sent_bytes):
      bytes_in_flight += sent_bytes
 
-B.5.  On Packet Acknowledgement
+B.5.  On Packet Acknowledgment
 
    Invoked from loss detection's OnAckReceived and is supplied with the
    newly acked_packets from sent_packets.

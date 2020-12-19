@@ -164,9 +164,9 @@ Table of Contents
      12.5.  Frames and Number Spaces
    13. Packetization and Reliability
      13.1.  Packet Processing
-     13.2.  Generating Acknowledgements
+     13.2.  Generating Acknowledgments
        13.2.1.  Sending ACK Frames
-       13.2.2.  Acknowledgement Frequency
+       13.2.2.  Acknowledgment Frequency
        13.2.3.  Managing ACK Ranges
        13.2.4.  Limiting Ranges by Tracking ACK Frames
        13.2.5.  Measuring and Reporting Host Delay
@@ -398,7 +398,7 @@ Table of Contents
       -  Section 12 describes concepts related to packets and frames,
 
       -  Section 13 defines models for the transmission, retransmission,
-         and acknowledgement of data, and
+         and acknowledgment of data, and
 
       -  Section 14 specifies rules for managing the size of datagrams
          carrying QUIC packets.
@@ -2296,7 +2296,7 @@ Table of Contents
    Loss of an Initial or Handshake packet from the server can cause a
    deadlock if the client does not send additional Initial or Handshake
    packets.  A deadlock could occur when the server reaches its anti-
-   amplification limit and the client has received acknowledgements for
+   amplification limit and the client has received acknowledgments for
    all the data it has sent.  In this case, when the client has no
    reason to send additional packets, the server will be unable to send
    more data because it has not validated the client's address.  To
@@ -4122,7 +4122,7 @@ Table of Contents
    did not send as a connection error of type PROTOCOL_VIOLATION, if it
    is able to detect the condition.
 
-13.2.  Generating Acknowledgements
+13.2.  Generating Acknowledgments
 
    Endpoints acknowledge all packets they receive and process.  However,
    only ack-eliciting packets cause an ACK frame to be sent within the
@@ -4167,7 +4167,7 @@ Table of Contents
    An endpoint MUST NOT send a non-ack-eliciting packet in response to a
    non-ack-eliciting packet, even if there are packet gaps that precede
    the received packet.  This avoids an infinite feedback loop of
-   acknowledgements, which could prevent the connection from ever
+   acknowledgments, which could prevent the connection from ever
    becoming idle.  Non-ack-eliciting packets are eventually acknowledged
    when the endpoint sends an ACK frame in response to other events.
 
@@ -4194,7 +4194,7 @@ Table of Contents
    network.
 
    An endpoint that is only sending ACK frames will not receive
-   acknowledgments from its peer unless those acknowledgements are
+   acknowledgments from its peer unless those acknowledgments are
    included in packets with ack-eliciting frames.  An endpoint SHOULD
    send an ACK frame with other frames when there are new ack-eliciting
    packets to acknowledge.  When only non-ack-eliciting packets need to
@@ -4203,11 +4203,11 @@ Table of Contents
 
    A receiver MUST NOT send an ack-eliciting frame in all packets that
    would otherwise be non-ack-eliciting, to avoid an infinite feedback
-   loop of acknowledgements.
+   loop of acknowledgments.
 
-13.2.2.  Acknowledgement Frequency
+13.2.2.  Acknowledgment Frequency
 
-   A receiver determines how frequently to send acknowledgements in
+   A receiver determines how frequently to send acknowledgments in
    response to ack-eliciting packets.  This determination involves a
    trade-off.
 
@@ -4218,7 +4218,7 @@ Table of Contents
    acknowledgments can adversely affect performance.
 
    On the other hand, reducing the frequency of packets that carry only
-   acknowledgements reduces packet transmission and processing cost at
+   acknowledgments reduces packet transmission and processing cost at
    both endpoints.  It can improve connection throughput on severely
    asymmetric links and reduce the volume of acknowledgment traffic
    using return path capacity; see Section 3 of [RFC3449].
@@ -4237,7 +4237,7 @@ Table of Contents
 13.2.3.  Managing ACK Ranges
 
    When an ACK frame is sent, one or more ranges of acknowledged packets
-   are included.  Including acknowledgements for older packets reduces
+   are included.  Including acknowledgments for older packets reduces
    the chance of spurious retransmissions caused by losing previously
    sent ACK frames, at the cost of larger ACK frames.
 
@@ -4253,7 +4253,7 @@ Table of Contents
    remembers and sends in ACK frames, both to limit the size of ACK
    frames and to avoid resource exhaustion.  After receiving
    acknowledgments for an ACK frame, the receiver SHOULD stop tracking
-   those acknowledged ACK Ranges.  Senders can expect acknowledgements
+   those acknowledged ACK Ranges.  Senders can expect acknowledgments
    for most packets, but QUIC does not guarantee receipt of an
    acknowledgment for every packet that the receiver processes.
 
@@ -4295,7 +4295,7 @@ Table of Contents
    ACK frame.
 
    A receiver that sends only non-ack-eliciting packets, such as ACK
-   frames, might not receive an acknowledgement for a long period of
+   frames, might not receive an acknowledgment for a long period of
    time.  This could cause the receiver to maintain state for a large
    number of ACK frames for a long period of time, and ACK frames it
    sends could be unnecessarily large.  In such a case, a receiver could
@@ -4304,9 +4304,9 @@ Table of Contents
 
    In cases without ACK frame loss, this algorithm allows for a minimum
    of 1 RTT of reordering.  In cases with ACK frame loss and reordering,
-   this approach does not guarantee that every acknowledgement is seen
-   by the sender before it is no longer included in the ACK frame.
-   Packets could be received out of order and all subsequent ACK frames
+   this approach does not guarantee that every acknowledgment is seen by
+   the sender before it is no longer included in the ACK frame.  Packets
+   could be received out of order and all subsequent ACK frames
    containing them could be lost.  In this case, the loss recovery
    algorithm could cause spurious retransmissions, but the sender will
    continue making forward progress.
@@ -4316,7 +4316,7 @@ Table of Contents
    An endpoint measures the delays intentionally introduced between the
    time the packet with the largest packet number is received and the
    time an acknowledgment is sent.  The endpoint encodes this
-   acknowledgement delay in the ACK Delay field of an ACK frame; see
+   acknowledgment delay in the ACK Delay field of an ACK frame; see
    Section 19.3.  This allows the receiver of the ACK frame to adjust
    for any intentional delays, which is important for getting a better
    estimate of the path RTT when acknowledgments are delayed.
@@ -4328,7 +4328,7 @@ Table of Contents
    unavailability of decryption keys, since these delays can be large
    and are likely to be non-repeating.
 
-   When the measured acknowledgement delay is larger than its
+   When the measured acknowledgment delay is larger than its
    max_ack_delay, an endpoint SHOULD report the measured delay.  This
    information is especially useful during the handshake when delays
    might be large; see Section 13.2.1.
@@ -4380,8 +4380,8 @@ Table of Contents
       stream.  Once an endpoint sends a RESET_STREAM frame, no further
       STREAM frames are needed.
 
-   *  ACK frames carry the most recent set of acknowledgements and the
-      acknowledgement delay from the largest acknowledged packet, as
+   *  ACK frames carry the most recent set of acknowledgments and the
+      acknowledgment delay from the largest acknowledged packet, as
       described in Section 13.2.1.  Delaying the transmission of packets
       containing ACK frames or resending old ACK frames can cause the
       peer to generate an inflated RTT sample or unnecessarily disable
@@ -4520,7 +4520,7 @@ Table of Contents
    corresponding ECT(0), ECT(1), or CE count.  These ECN counts are
    included in subsequent ACK frames; see Section 13.2 and Section 19.3.
 
-   Each packet number space maintains separate acknowledgement state and
+   Each packet number space maintains separate acknowledgment state and
    separate ECN counts.  Coalesced QUIC packets (see Section 12.2) share
    the same IP header so the ECN counts are incremented once for each
    coalesced QUIC packet.
@@ -4596,7 +4596,7 @@ Table of Contents
    with an ECT(1) marking.  These checks can detect remarking of ECN-CE
    markings by the network.
 
-   An endpoint could miss acknowledgements for a packet when ACK frames
+   An endpoint could miss acknowledgments for a packet when ACK frames
    are lost.  It is therefore possible for the total increase in ECT(0),
    ECT(1), and ECN-CE counts to be greater than the number of packets
    that are newly acknowledged by an ACK frame.  This is why ECN counts
@@ -4943,11 +4943,11 @@ Table of Contents
    The encoded packet number is protected as described in Section 5.4 of
    [QUIC-TLS].
 
-   Prior to receiving an acknowledgement for a packet number space, the
+   Prior to receiving an acknowledgment for a packet number space, the
    full packet number MUST be included; it is not to be truncated as
    described below.
 
-   After an acknowledgement is received for a packet number space, the
+   After an acknowledgment is received for a packet number space, the
    sender MUST use a packet number size able to represent more than
    twice as large a range than the difference between the largest
    acknowledged packet and packet number being sent.  A peer receiving
@@ -5756,21 +5756,20 @@ Table of Contents
       Setting this parameter is equivalent to sending a MAX_STREAMS
       (Section 19.11) of the corresponding type with the same value.
 
-   ack_delay_exponent (0x0a):  The acknowledgement delay exponent is an
+   ack_delay_exponent (0x0a):  The acknowledgment delay exponent is an
       integer value indicating an exponent used to decode the ACK Delay
       field in the ACK frame (Section 19.3).  If this value is absent, a
       default value of 3 is assumed (indicating a multiplier of 8).
       Values above 20 are invalid.
 
-   max_ack_delay (0x0b):  The maximum acknowledgement delay is an
-      integer value indicating the maximum amount of time in
-      milliseconds by which the endpoint will delay sending
-      acknowledgments.  This value SHOULD include the receiver's
-      expected delays in alarms firing.  For example, if a receiver sets
-      a timer for 5ms and alarms commonly fire up to 1ms late, then it
-      should send a max_ack_delay of 6ms.  If this value is absent, a
-      default of 25 milliseconds is assumed.  Values of 2^14 or greater
-      are invalid.
+   max_ack_delay (0x0b):  The maximum acknowledgment delay is an integer
+      value indicating the maximum amount of time in milliseconds by
+      which the endpoint will delay sending acknowledgments.  This value
+      SHOULD include the receiver's expected delays in alarms firing.
+      For example, if a receiver sets a timer for 5ms and alarms
+      commonly fire up to 1ms late, then it should send a max_ack_delay
+      of 6ms.  If this value is absent, a default of 25 milliseconds is
+      assumed.  Values of 2^14 or greater are invalid.
 
    disable_active_migration (0x0c):  The disable active migration
       transport parameter is included if the endpoint does not support
@@ -5919,7 +5918,7 @@ Table of Contents
    and, if they have enabled ECN for packets they send, they SHOULD use
    the information in the ECN section to manage their congestion state.
 
-   QUIC acknowledgements are irrevocable.  Once acknowledged, a packet
+   QUIC acknowledgments are irrevocable.  Once acknowledged, a packet
    remains acknowledged, even if it does not appear in a future ACK
    frame.  This is unlike reneging for TCP SACKs ([RFC2018]).
 
@@ -5956,7 +5955,7 @@ Table of Contents
       generating the ACK frame.  Unlike the packet number in the QUIC
       long or short header, the value in an ACK frame is not truncated.
 
-   ACK Delay:  A variable-length integer encoding the acknowledgement
+   ACK Delay:  A variable-length integer encoding the acknowledgment
       delay in microseconds; see Section 13.2.5.  It is decoded by
       multiplying the value in the field by 2 to the power of the
       ack_delay_exponent transport parameter sent by the sender of the

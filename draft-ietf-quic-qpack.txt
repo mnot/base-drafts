@@ -98,7 +98,7 @@ Table of Contents
        4.3.3.  Insert With Literal Name
        4.3.4.  Duplicate
      4.4.  Decoder Instructions
-       4.4.1.  Section Acknowledgement
+       4.4.1.  Section Acknowledgment
        4.4.2.  Stream Cancellation
        4.4.3.  Insert Count Increment
      4.5.  Field Line Representations
@@ -256,8 +256,8 @@ Table of Contents
    static or dynamic table.  References to the static table and literal
    representations do not require any dynamic state and never risk head-
    of-line blocking.  References to the dynamic table risk head-of-line
-   blocking if the encoder has not received an acknowledgement
-   indicating the entry is available at the decoder.
+   blocking if the encoder has not received an acknowledgment indicating
+   the entry is available at the decoder.
 
    An encoder MAY insert any entry in the dynamic table it chooses; it
    is not limited to field lines it is compressing.
@@ -393,9 +393,9 @@ Table of Contents
    stream.  The decoder tracks the Known Received Count in order to be
    able to send Insert Count Increment instructions.
 
-   A Section Acknowledgement instruction (Section 4.4.1) implies that
-   the decoder has received all dynamic table state necessary to decode
-   the field section.  If the Required Insert Count of the acknowledged
+   A Section Acknowledgment instruction (Section 4.4.1) implies that the
+   decoder has received all dynamic table state necessary to decode the
+   field section.  If the Required Insert Count of the acknowledged
    field section is greater than the current Known Received Count, Known
    Received Count is updated to the value of the Required Insert Count.
 
@@ -449,10 +449,10 @@ Table of Contents
 
    After the decoder finishes decoding a field section encoded using
    representations containing dynamic table references, it MUST emit a
-   Section Acknowledgement instruction (Section 4.4.1).  A stream may
+   Section Acknowledgment instruction (Section 4.4.1).  A stream may
    carry multiple field sections in the case of intermediate responses,
    trailers, and pushed requests.  The encoder interprets each
-   Section Acknowledgement instruction as acknowledging the earliest
+   Section Acknowledgment instruction as acknowledging the earliest
    unacknowledged field section containing dynamic table references sent
    on the given stream.
 
@@ -469,7 +469,7 @@ Table of Contents
    references.  An encoder cannot infer from this instruction that any
    updates to the dynamic table have been received.
 
-   The Section Acknowledgement and Stream Cancellation instructions
+   The Section Acknowledgment and Stream Cancellation instructions
    permit the encoder to remove references to entries in the dynamic
    table.  When an entry with absolute index lower than the Known
    Received Count has zero references, then it is considered evictable;
@@ -484,7 +484,7 @@ Table of Contents
    encoder, but could be redundant with other decoder feedback.  By
    delaying an Insert Count Increment instruction, the decoder might be
    able to coalesce multiple Insert Count Increment instructions, or
-   replace them entirely with Section Acknowledgements; see
+   replace them entirely with Section Acknowledgments; see
    Section 4.4.1.  However, delaying too long may lead to compression
    inefficiencies if the encoder waits for an entry to be acknowledged
    before using it.
@@ -874,10 +874,10 @@ Table of Contents
    the encoder about the processing of field sections and table updates
    to ensure consistency of the dynamic table.
 
-4.4.1.  Section Acknowledgement
+4.4.1.  Section Acknowledgment
 
    After processing an encoded field section whose declared Required
-   Insert Count is not zero, the decoder emits a Section Acknowledgement
+   Insert Count is not zero, the decoder emits a Section Acknowledgment
    instruction.  The instruction starts with the '1' 1-bit pattern,
    followed by the field section's associated stream ID encoded as a
    7-bit prefix integer; see Section 4.1.1.
@@ -890,15 +890,14 @@ Table of Contents
    | 1 |      Stream ID (7+)       |
    +---+---------------------------+
 
-                     Figure 9: Section Acknowledgement
+                      Figure 9: Section Acknowledgment
 
-   If an encoder receives a Section Acknowledgement instruction
-   referring to a stream on which every encoded field section with a
-   non-zero Required Insert Count has already been acknowledged, this
-   MUST be treated as a connection error of type
-   QPACK_DECODER_STREAM_ERROR.
+   If an encoder receives a Section Acknowledgment instruction referring
+   to a stream on which every encoded field section with a non-zero
+   Required Insert Count has already been acknowledged, this MUST be
+   treated as a connection error of type QPACK_DECODER_STREAM_ERROR.
 
-   The Section Acknowledgement instruction might increase the Known
+   The Section Acknowledgment instruction might increase the Known
    Received Count; see Section 2.1.4.
 
 4.4.2.  Stream Cancellation
@@ -1892,7 +1891,7 @@ B.2.  Dynamic Table
                                  Size=106
 
    Stream: Decoder
-   84                  | Section Acknowledgement (stream=4)
+   84                  | Section Acknowledgment (stream=4)
 
                                  Abs Ref Name        Value
                                   1   0  :authority  www.example.com
@@ -2106,7 +2105,7 @@ D.10.  Since draft-ietf-quic-qpack-10
 
 D.11.  Since draft-ietf-quic-qpack-09
 
-   *  Decoders MUST emit Header Acknowledgements (#2939)
+   *  Decoders MUST emit Header Acknowledgments (#2939)
 
    *  Updated error code for multiple encoder or decoder streams (#2970)
 

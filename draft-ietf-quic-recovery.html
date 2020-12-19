@@ -950,7 +950,7 @@ code and issues list for this draft can be found at
                 <p id="section-toc.1-1.4.2.5.1"><a href="#section-4.5" class="xref">4.5</a>.  <a href="#name-more-ack-ranges" class="xref">More ACK Ranges</a><a href="#section-toc.1-1.4.2.5.1" class="pilcrow">¶</a></p>
 </li>
               <li class="ulEmpty toc compact" id="section-toc.1-1.4.2.6">
-                <p id="section-toc.1-1.4.2.6.1"><a href="#section-4.6" class="xref">4.6</a>.  <a href="#name-explicit-correction-for-del" class="xref">Explicit Correction For Delayed Acknowledgements</a><a href="#section-toc.1-1.4.2.6.1" class="pilcrow">¶</a></p>
+                <p id="section-toc.1-1.4.2.6.1"><a href="#section-4.6" class="xref">4.6</a>.  <a href="#name-explicit-correction-for-del" class="xref">Explicit Correction For Delayed Acknowledgments</a><a href="#section-toc.1-1.4.2.6.1" class="pilcrow">¶</a></p>
 </li>
               <li class="ulEmpty toc compact" id="section-toc.1-1.4.2.7">
                 <p id="section-toc.1-1.4.2.7.1"><a href="#section-4.7" class="xref">4.7</a>.  <a href="#name-probe-timeout-replaces-rto-" class="xref">Probe Timeout Replaces RTO and TLP</a><a href="#section-toc.1-1.4.2.7.1" class="pilcrow">¶</a></p>
@@ -978,7 +978,7 @@ code and issues list for this draft can be found at
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="xref">6</a>.  <a href="#name-loss-detection" class="xref">Loss Detection</a><a href="#section-toc.1-1.6.1" class="pilcrow">¶</a></p>
 <ul class="ulEmpty toc compact">
 <li class="ulEmpty toc compact" id="section-toc.1-1.6.2.1">
-                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="xref">6.1</a>.  <a href="#name-acknowledgement-based-detec" class="xref">Acknowledgement-Based Detection</a><a href="#section-toc.1-1.6.2.1.1" class="pilcrow">¶</a></p>
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="xref">6.1</a>.  <a href="#name-acknowledgment-based-detect" class="xref">Acknowledgment-Based Detection</a><a href="#section-toc.1-1.6.2.1.1" class="pilcrow">¶</a></p>
 <ul class="ulEmpty toc compact">
 <li class="ulEmpty toc compact" id="section-toc.1-1.6.2.1.2.1">
                     <p id="section-toc.1-1.6.2.1.2.1.1"><a href="#section-6.1.1" class="xref">6.1.1</a>.  <a href="#name-packet-threshold" class="xref">Packet Threshold</a><a href="#section-toc.1-1.6.2.1.2.1.1" class="pilcrow">¶</a></p>
@@ -1151,7 +1151,7 @@ code and issues list for this draft can be found at
                 <p id="section-toc.1-1.12.2.4.1"><a href="#section-b.4" class="xref">B.4</a>.  <a href="#name-on-packet-sent" class="xref">On Packet Sent</a><a href="#section-toc.1-1.12.2.4.1" class="pilcrow">¶</a></p>
 </li>
               <li class="ulEmpty toc compact" id="section-toc.1-1.12.2.5">
-                <p id="section-toc.1-1.12.2.5.1"><a href="#section-b.5" class="xref">B.5</a>.  <a href="#name-on-packet-acknowledgement" class="xref">On Packet Acknowledgement</a><a href="#section-toc.1-1.12.2.5.1" class="pilcrow">¶</a></p>
+                <p id="section-toc.1-1.12.2.5.1"><a href="#section-b.5" class="xref">B.5</a>.  <a href="#name-on-packet-acknowledgment" class="xref">On Packet Acknowledgment</a><a href="#section-toc.1-1.12.2.5.1" class="pilcrow">¶</a></p>
 </li>
               <li class="ulEmpty toc compact" id="section-toc.1-1.12.2.6">
                 <p id="section-toc.1-1.12.2.6.1"><a href="#section-b.6" class="xref">B.6</a>.  <a href="#name-on-new-congestion-event" class="xref">On New Congestion Event</a><a href="#section-toc.1-1.12.2.6.1" class="pilcrow">¶</a></p>
@@ -1317,7 +1317,7 @@ ack-eliciting.<a href="#section-2-3.2.1" class="pilcrow">¶</a></p>
 Ack-eliciting packets:  </dt>
         <dd style="margin-left: 1.5em" id="section-2-3.4">
           <p id="section-2-3.4.1">Packets that contain ack-eliciting frames elicit an ACK from the receiver
-within the maximum acknowledgement delay and are called ack-eliciting packets.<a href="#section-2-3.4.1" class="pilcrow">¶</a></p>
+within the maximum acknowledgment delay and are called ack-eliciting packets.<a href="#section-2-3.4.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-2-3.5">
@@ -1356,7 +1356,7 @@ packets.<a href="#section-3-4.1" class="pilcrow">¶</a>
 </li>
         <li class="normal" id="section-3-4.2">Long header packets that contain CRYPTO frames are critical to the
 performance of the QUIC handshake and use shorter timers for
-acknowledgement.<a href="#section-3-4.2" class="pilcrow">¶</a>
+acknowledgment.<a href="#section-3-4.2" class="pilcrow">¶</a>
 </li>
         <li class="normal" id="section-3-4.3">Packets containing frames besides ACK or CONNECTION_CLOSE frames count toward
 congestion control limits and are considered in-flight.<a href="#section-3-4.3" class="pilcrow">¶</a>
@@ -1383,7 +1383,7 @@ differences are briefly described below.<a href="#section-4-1" class="pilcrow">�
         </h3>
 <p id="section-4.1-1">QUIC uses separate packet number spaces for each encryption level, except 0-RTT
 and all generations of 1-RTT keys use the same packet number space.  Separate
-packet number spaces ensures acknowledgement of packets sent with one level of
+packet number spaces ensures acknowledgment of packets sent with one level of
 encryption will not cause spurious retransmission of packets sent with a
 different encryption level.  Congestion control and round-trip time (RTT)
 measurement are unified across packet number spaces.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
@@ -1449,10 +1449,10 @@ environments, this speeds recovery, reduces spurious retransmits, and ensures
 forward progress without relying on timeouts.<a href="#section-4.5-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="explicit-correction-for-delayed-acknowledgements">
+<div id="explicit-correction-for-delayed-acknowledgments">
 <section id="section-4.6">
         <h3 id="name-explicit-correction-for-del">
-<a href="#section-4.6" class="section-number selfRef">4.6. </a><a href="#name-explicit-correction-for-del" class="section-name selfRef">Explicit Correction For Delayed Acknowledgements</a>
+<a href="#section-4.6" class="section-number selfRef">4.6. </a><a href="#name-explicit-correction-for-del" class="section-name selfRef">Explicit Correction For Delayed Acknowledgments</a>
         </h3>
 <p id="section-4.6-1">QUIC endpoints measure the delay incurred between when a packet is received and
 when the corresponding acknowledgment is sent, allowing a peer to maintain a
@@ -1465,7 +1465,7 @@ more accurate round-trip time estimate; see Section 13.2 of <span>[<a href="#QUI
 <a href="#section-4.7" class="section-number selfRef">4.7. </a><a href="#name-probe-timeout-replaces-rto-" class="section-name selfRef">Probe Timeout Replaces RTO and TLP</a>
         </h3>
 <p id="section-4.7-1">QUIC uses a probe timeout (PTO; see <a href="#pto" class="xref">Section 6.2</a>), with a timer based on TCP's RTO
-computation.  QUIC's PTO includes the peer's maximum expected acknowledgement
+computation.  QUIC's PTO includes the peer's maximum expected acknowledgment
 delay instead of using a fixed minimum timeout. QUIC does not collapse the
 congestion window until persistent congestion (<a href="#persistent-congestion" class="xref">Section 7.6</a>) is
 declared, unlike TCP, which collapses the congestion window upon expiry of an
@@ -1495,7 +1495,7 @@ prior to a dramatic decrease in congestion window; see
 that single packet means that the sender needs to waiting for a PTO
 (<a href="#pto" class="xref">Section 6.2</a>) to recover, which can be much longer than a round-trip time.
 Sending a single ack-eliciting packet also increases the chances of incurring
-additional latency when a receiver delays its acknowledgement.<a href="#section-4.8-1" class="pilcrow">¶</a></p>
+additional latency when a receiver delays its acknowledgment.<a href="#section-4.8-1" class="pilcrow">¶</a></p>
 <p id="section-4.8-2">QUIC therefore recommends that the minimum congestion window be two
 packets. While this increases network load, it is considered safe, since the
 sender will still reduce its sending rate exponentially under persistent
@@ -1550,7 +1550,7 @@ largest acknowledged packet.<a href="#section-5.1-6" class="pilcrow">¶</a></p>
 <p id="section-5.1-7">An RTT sample MUST NOT be generated on receiving an ACK frame that does not
 newly acknowledge at least one ack-eliciting packet. A peer usually does not
 send an ACK frame when only non-ack-eliciting packets are received. Therefore
-an ACK frame that contains acknowledgements for only non-ack-eliciting packets
+an ACK frame that contains acknowledgments for only non-ack-eliciting packets
 could include an arbitrarily large ACK Delay value.  Ignoring
 such ACK frames avoids complications in subsequent smoothed_rtt and rttvar
 computations.<a href="#section-5.1-7" class="pilcrow">¶</a></p>
@@ -1587,8 +1587,8 @@ of min_rtt and smoothed_rtt (<a href="#smoothed-rtt" class="xref">Section 5.3</a
 and because it is possible that an increase in path delay resulted in persistent
 congestion being incorrectly declared.<a href="#section-5.2-5" class="pilcrow">¶</a></p>
 <p id="section-5.2-6">Endpoints MAY re-establish the min_rtt at other times in the connection, such as
-when traffic volume is low and an acknowledgement is received with a low
-acknowledgement delay. Implementations SHOULD NOT refresh the min_rtt
+when traffic volume is low and an acknowledgment is received with a low
+acknowledgment delay. Implementations SHOULD NOT refresh the min_rtt
 value too often, since the actual minimum RTT of the path is not
 frequently observable.<a href="#section-5.2-6" class="pilcrow">¶</a></p>
 </section>
@@ -1602,47 +1602,47 @@ frequently observable.<a href="#section-5.2-6" class="pilcrow">¶</a></p>
 samples, and rttvar is the variation in the RTT samples, estimated using a
 mean variation.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
 <p id="section-5.3-2">The calculation of smoothed_rtt uses RTT samples after adjusting them for
-acknowledgement delays. These delays are decoded from the ACK Delay field of
+acknowledgment delays. These delays are decoded from the ACK Delay field of
 ACK frames as described in Section 19.3 of <span>[<a href="#QUIC-TRANSPORT" class="xref">QUIC-TRANSPORT</a>]</span>.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
-<p id="section-5.3-3">The peer might report acknowledgement delays that are larger than the peer's
+<p id="section-5.3-3">The peer might report acknowledgment delays that are larger than the peer's
 max_ack_delay during the handshake (Section 13.2.1 of <span>[<a href="#QUIC-TRANSPORT" class="xref">QUIC-TRANSPORT</a>]</span>). To
 account for this, the endpoint SHOULD ignore max_ack_delay until the handshake
 is confirmed (Section 4.1.2 of <span>[<a href="#QUIC-TLS" class="xref">QUIC-TLS</a>]</span>). When they occur, these large
-acknowledgement delays are likely to be non-repeating and limited to the
+acknowledgment delays are likely to be non-repeating and limited to the
 handshake. The endpoint can therefore use them without limiting them to the
 max_ack_delay, avoiding unnecessary inflation of the RTT estimate.<a href="#section-5.3-3" class="pilcrow">¶</a></p>
-<p id="section-5.3-4">Note however that a large acknowledgement delay can result in a substantially
+<p id="section-5.3-4">Note however that a large acknowledgment delay can result in a substantially
 inflated smoothed_rtt, if there is either an error in the peer's reporting of
-the acknowledgement delay or in the endpoint's min_rtt estimate.  Therefore,
+the acknowledgment delay or in the endpoint's min_rtt estimate.  Therefore,
 prior to handshake confirmation, an endpoint MAY ignore RTT samples if adjusting
-the RTT sample for acknowledgement delay causes the sample to be less than the
+the RTT sample for acknowledgment delay causes the sample to be less than the
 min_rtt.<a href="#section-5.3-4" class="pilcrow">¶</a></p>
-<p id="section-5.3-5">After the handshake is confirmed, any acknowledgement delays reported by the
+<p id="section-5.3-5">After the handshake is confirmed, any acknowledgment delays reported by the
 peer that are greater than the peer's max_ack_delay are attributed to
 unintentional but potentially repeating delays, such as scheduler latency at the
-peer or loss of previous acknowledgements.  Excess delays could also be due to
+peer or loss of previous acknowledgments.  Excess delays could also be due to
 a non-compliant receiver.  Therefore, these extra delays are considered
 effectively part of path delay and incorporated into the RTT estimate.<a href="#section-5.3-5" class="pilcrow">¶</a></p>
-<p id="section-5.3-6">Therefore, when adjusting an RTT sample using peer-reported acknowledgement
+<p id="section-5.3-6">Therefore, when adjusting an RTT sample using peer-reported acknowledgment
 delays, an endpoint:<a href="#section-5.3-6" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-5.3-7.1">MAY ignore the acknowledgement delay for Initial packets, since these
-acknowledgements are not delayed by the peer (Section 13.2.1 of
+<li class="normal" id="section-5.3-7.1">MAY ignore the acknowledgment delay for Initial packets, since these
+acknowledgments are not delayed by the peer (Section 13.2.1 of
 <span>[<a href="#QUIC-TRANSPORT" class="xref">QUIC-TRANSPORT</a>]</span>);<a href="#section-5.3-7.1" class="pilcrow">¶</a>
 </li>
           <li class="normal" id="section-5.3-7.2">SHOULD ignore the peer's max_ack_delay until the handshake is confirmed;<a href="#section-5.3-7.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-5.3-7.3">MUST use the lesser of the acknowledgement delay and the peer's max_ack_delay
+          <li class="normal" id="section-5.3-7.3">MUST use the lesser of the acknowledgment delay and the peer's max_ack_delay
 after the handshake is confirmed; and<a href="#section-5.3-7.3" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-5.3-7.4">MUST NOT subtract the acknowledgement delay from the RTT sample if the
+          <li class="normal" id="section-5.3-7.4">MUST NOT subtract the acknowledgment delay from the RTT sample if the
 resulting value is smaller than the min_rtt.  This limits the underestimation
 of the smoothed_rtt due to a misreporting peer.<a href="#section-5.3-7.4" class="pilcrow">¶</a>
 </li>
         </ul>
-<p id="section-5.3-8">Additionally, an endpoint might postpone the processing of acknowledgements when
+<p id="section-5.3-8">Additionally, an endpoint might postpone the processing of acknowledgments when
 the corresponding decryption keys are not immediately available. For example, a
-client might receive an acknowledgement for a 0-RTT packet that it cannot
+client might receive an acknowledgment for a 0-RTT packet that it cannot
 decrypt because 1-RTT packet protection keys are not yet available to it. In
 such cases, an endpoint SHOULD subtract such local delays from its RTT sample
 until the handshake is confirmed.<a href="#section-5.3-8" class="pilcrow">¶</a></p>
@@ -1675,7 +1675,7 @@ rttvar = latest_rtt / 2
 <p id="section-5.3-16">On subsequent RTT samples, smoothed_rtt and rttvar evolve as follows:<a href="#section-5.3-16" class="pilcrow">¶</a></p>
 <div class="artwork art-text alignLeft" id="section-5.3-17">
 <pre>
-ack_delay = decoded acknowledgement delay from ACK frame
+ack_delay = decoded acknowledgment delay from ACK frame
 if (handshake confirmed):
   ack_delay = min(ack_delay, max_ack_delay)
 adjusted_rtt = latest_rtt
@@ -1695,8 +1695,8 @@ rttvar = 3/4 * rttvar + 1/4 * rttvar_sample
       <h2 id="name-loss-detection">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-loss-detection" class="section-name selfRef">Loss Detection</a>
       </h2>
-<p id="section-6-1">QUIC senders use acknowledgements to detect lost packets, and a probe
-time out (see <a href="#pto" class="xref">Section 6.2</a>) to ensure acknowledgements are received. This section
+<p id="section-6-1">QUIC senders use acknowledgments to detect lost packets, and a probe
+time out (see <a href="#pto" class="xref">Section 6.2</a>) to ensure acknowledgments are received. This section
 provides a description of these algorithms.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <p id="section-6-2">If a packet is lost, the QUIC transport needs to recover from that loss, such
 as by retransmitting the data, sending an updated frame, or discarding the
@@ -1706,10 +1706,10 @@ congestion control, because RTT and congestion control are properties of the
 path, whereas loss detection also relies upon key availability.<a href="#section-6-3" class="pilcrow">¶</a></p>
 <div id="ack-loss-detection">
 <section id="section-6.1">
-        <h3 id="name-acknowledgement-based-detec">
-<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-acknowledgement-based-detec" class="section-name selfRef">Acknowledgement-Based Detection</a>
+        <h3 id="name-acknowledgment-based-detect">
+<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-acknowledgment-based-detect" class="section-name selfRef">Acknowledgment-Based Detection</a>
         </h3>
-<p id="section-6.1-1">Acknowledgement-based loss detection implements the spirit of TCP's Fast
+<p id="section-6.1-1">Acknowledgment-based loss detection implements the spirit of TCP's Fast
 Retransmit (<span>[<a href="#RFC5681" class="xref">RFC5681</a>]</span>), Early Retransmit (<span>[<a href="#RFC5827" class="xref">RFC5827</a>]</span>), FACK (<span>[<a href="#FACK" class="xref">FACK</a>]</span>),
 SACK loss recovery (<span>[<a href="#RFC6675" class="xref">RFC6675</a>]</span>), and RACK (<span>[<a href="#RACK" class="xref">RACK</a>]</span>). This
 section provides an overview of how these algorithms are implemented in QUIC.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
@@ -1723,7 +1723,7 @@ acknowledged packet.<a href="#section-6.1-3.1" class="pilcrow">¶</a>
 (<a href="#time-threshold" class="xref">Section 6.1.2</a>).<a href="#section-6.1-3.2" class="pilcrow">¶</a>
 </li>
         </ul>
-<p id="section-6.1-4">The acknowledgement indicates that a packet sent later was delivered, and the
+<p id="section-6.1-4">The acknowledgment indicates that a packet sent later was delivered, and the
 packet and time thresholds provide some tolerance for packet reordering.<a href="#section-6.1-4" class="pilcrow">¶</a></p>
 <p id="section-6.1-5">Spuriously declaring packets as lost leads to unnecessary retransmissions and
 may result in degraded performance due to the actions of the congestion
@@ -1770,7 +1770,7 @@ lost, then a timer SHOULD be set for the remaining time.<a href="#section-6.1.2-
 <p id="section-6.1.2-4">Using max(smoothed_rtt, latest_rtt) protects from the two following cases:<a href="#section-6.1.2-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.1.2-5.1">the latest RTT sample is lower than the smoothed RTT, perhaps due to
-reordering where the acknowledgement encountered a shorter path;<a href="#section-6.1.2-5.1" class="pilcrow">¶</a>
+reordering where the acknowledgment encountered a shorter path;<a href="#section-6.1.2-5.1" class="pilcrow">¶</a>
 </li>
             <li class="normal" id="section-6.1.2-5.2">the latest RTT sample is higher than the smoothed RTT, perhaps due to a
 sustained increase in the actual RTT, but the smoothed RTT has not yet caught
@@ -1806,11 +1806,11 @@ and larger thresholds increase loss detection delay.<a href="#section-6.1.2-8" c
 <p id="section-6.2-1">A Probe Timeout (PTO) triggers sending one or two probe datagrams when
 ack-eliciting packets are not acknowledged within the expected period of
 time or the server may not have validated the client's address.  A PTO enables
-a connection to recover from loss of tail packets or acknowledgements.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+a connection to recover from loss of tail packets or acknowledgments.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 <p id="section-6.2-2">As with loss detection, the probe timeout is per packet number space. That is, a
 PTO value is computed per packet number space.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
 <p id="section-6.2-3">A PTO timer expiration event does not indicate packet loss and MUST NOT cause
-prior unacknowledged packets to be marked as lost. When an acknowledgement
+prior unacknowledged packets to be marked as lost. When an acknowledgment
 is received that newly acknowledges packets, loss detection proceeds as
 dictated by packet and time threshold mechanisms; see <a href="#ack-loss-detection" class="xref">Section 6.1</a>.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
 <p id="section-6.2-4">The PTO algorithm used in QUIC implements the reliability functions of
@@ -1830,10 +1830,10 @@ PTO = smoothed_rtt + max(4*rttvar, kGranularity) + max_ack_delay
 </pre><a href="#section-6.2.1-2" class="pilcrow">¶</a>
 </div>
 <p id="section-6.2.1-3">The PTO period is the amount of time that a sender ought to wait for an
-acknowledgement of a sent packet.  This time period includes the estimated
+acknowledgment of a sent packet.  This time period includes the estimated
 network roundtrip-time (smoothed_rtt), the variation in the estimate (4*rttvar),
 and max_ack_delay, to account for the maximum time by which a receiver might
-delay sending an acknowledgement.<a href="#section-6.2.1-3" class="pilcrow">¶</a></p>
+delay sending an acknowledgment.<a href="#section-6.2.1-3" class="pilcrow">¶</a></p>
 <p id="section-6.2.1-4">When the PTO is armed for Initial or Handshake packet number spaces, the
 max_ack_delay in the PTO period computation is set to 0, since the peer is
 expected to not delay these packets intentionally; see 13.2.1 of
@@ -1847,7 +1847,7 @@ number spaces.<a href="#section-6.2.1-6" class="pilcrow">¶</a></p>
 space until the handshake is confirmed. Doing so prevents the endpoint from
 retransmitting information in packets when either the peer does not yet have the
 keys to process them or the endpoint does not yet have the keys to process their
-acknowledgements. For example, this can happen when a client sends 0-RTT packets
+acknowledgments. For example, this can happen when a client sends 0-RTT packets
 to the server; it does so without knowing whether the server will be able to
 decrypt them. Similarly, this can happen when a server sends 1-RTT packets
 before confirming that the client has verified the server's certificate and can
@@ -1859,14 +1859,14 @@ or acknowledged, when the handshake is confirmed (Section 4.1.2 of
 of the round-trip time and for the correct packet across packet number spaces.<a href="#section-6.2.1-8" class="pilcrow">¶</a></p>
 <p id="section-6.2.1-9">When a PTO timer expires, the PTO backoff MUST be increased, resulting in the
 PTO period being set to twice its current value. The PTO backoff factor is reset
-when an acknowledgement is received, except in the following case. A server
+when an acknowledgment is received, except in the following case. A server
 might take longer to respond to packets during the handshake than otherwise.  To
 protect such a server from repeated client probes, the PTO backoff is not reset
 at a client that is not yet certain that the server has finished validating the
 client's address. That is, a client does not reset the PTO backoff factor on
-receiving acknowledgements in Initial packets.<a href="#section-6.2.1-9" class="pilcrow">¶</a></p>
+receiving acknowledgments in Initial packets.<a href="#section-6.2.1-9" class="pilcrow">¶</a></p>
 <p id="section-6.2.1-10">This exponential reduction in the sender's rate is important because
-consecutive PTOs might be caused by loss of packets or acknowledgements due to
+consecutive PTOs might be caused by loss of packets or acknowledgments due to
 severe congestion.  Even when there are ack-eliciting packets in-flight in
 multiple packet number spaces, the exponential increase in probe timeout
 occurs across all spaces to prevent excess load on the network.  For example,
@@ -1916,7 +1916,7 @@ client's address even if 0-RTT is accepted.<a href="#section-6.2.2.1-1" class="p
 client, it is the client's responsibility to send packets to unblock the server
 until it is certain that the server has finished its address validation
 (see Section 8 of <span>[<a href="#QUIC-TRANSPORT" class="xref">QUIC-TRANSPORT</a>]</span>).  That is, the client MUST set the
-probe timer if the client has not received an acknowledgement for one of its
+probe timer if the client has not received an acknowledgment for one of its
 Handshake packets and the handshake is not confirmed (see Section 4.1.2 of
 <span>[<a href="#QUIC-TLS" class="xref">QUIC-TLS</a>]</span>), even if there are no packets in flight.  When the PTO fires,
 the client MUST send a Handshake packet if it has Handshake keys, otherwise it
@@ -1945,7 +1945,7 @@ Endpoints that do not cease retransmitting packets in response to
 unauthenticated data risk creating an infinite exchange of packets.<a href="#section-6.2.3-2" class="pilcrow">¶</a></p>
 <p id="section-6.2.3-3">Endpoints can also use coalesced packets (see Section 12.2 of
 <span>[<a href="#QUIC-TRANSPORT" class="xref">QUIC-TRANSPORT</a>]</span>) to ensure that each datagram elicits at least one
-acknowledgement. For example, a client can coalesce an Initial packet
+acknowledgment. For example, a client can coalesce an Initial packet
 containing PING and PADDING frames with a 0-RTT data packet and a server can
 coalesce an Initial packet containing a PING frame with one or more packets in
 its first flight.<a href="#section-6.2.3-3" class="pilcrow">¶</a></p>
@@ -1969,7 +1969,7 @@ particularly valuable when the server has both Initial and Handshake data
 in-flight or the client has both Handshake and Application Data in-flight,
 because the peer might only have receive keys for one of the two packet number
 spaces.<a href="#section-6.2.4-2" class="pilcrow">¶</a></p>
-<p id="section-6.2.4-3">If the sender wants to elicit a faster acknowledgement on PTO, it can skip a
+<p id="section-6.2.4-3">If the sender wants to elicit a faster acknowledgment on PTO, it can skip a
 packet number to eliminate the acknowledgment delay.<a href="#section-6.2.4-3" class="pilcrow">¶</a></p>
 <p id="section-6.2.4-4">When the PTO timer expires, an ack-eliciting packet MUST be sent.  An endpoint
 SHOULD include new data in this packet.  Previously sent data MAY be sent if
@@ -2026,7 +2026,7 @@ initial RTT estimate.<a href="#section-6.3-3" class="pilcrow">¶</a></p>
         </h3>
 <p id="section-6.4-1">When packet protection keys are discarded (see Section 4.9 of <span>[<a href="#QUIC-TLS" class="xref">QUIC-TLS</a>]</span>),
 all packets that were sent with those keys can no longer be acknowledged because
-their acknowledgements cannot be processed anymore. The sender MUST discard
+their acknowledgments cannot be processed anymore. The sender MUST discard
 all recovery state associated with those packets and MUST remove them from
 the count of bytes in flight.<a href="#section-6.4-1" class="pilcrow">¶</a></p>
 <p id="section-6.4-2">Endpoints stop sending and receiving Initial packets once they start exchanging
@@ -2227,7 +2227,7 @@ the earliest acknowledged packet in a given packet number space.<a href="#sectio
 however count these packets as being additionally in flight, since these packets
 add network load without establishing packet loss.  Note that sending probe
 packets might cause the sender's bytes in flight to exceed the congestion window
-until an acknowledgement is received that establishes loss or delivery of
+until an acknowledgment is received that establishes loss or delivery of
 packets.<a href="#section-7.5-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2278,7 +2278,7 @@ congestion without depending on PTO expiration.<a href="#section-7.6.1-7" class=
 <a href="#section-7.6.2" class="section-number selfRef">7.6.2. </a><a href="#name-establishing-persistent-con" class="section-name selfRef">Establishing Persistent Congestion</a>
           </h4>
 <p id="section-7.6.2-1">A sender establishes persistent congestion after the receipt of an
-acknowledgement if two packets that are ack-eliciting are declared lost, and:<a href="#section-7.6.2-1" class="pilcrow">¶</a></p>
+acknowledgment if two packets that are ack-eliciting are declared lost, and:<a href="#section-7.6.2-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-7.6.2-2.1">across all packet number spaces, none of the packets sent between the send
 times of these two packets are acknowledged;<a href="#section-7.6.2-2.1" class="pilcrow">¶</a>
@@ -2340,7 +2340,7 @@ kPersistentCongestionThreshold = 3
               </tr>
               <tr>
                 <td class="text-left" rowspan="1" colspan="1">t=1.2</td>
-                <td class="text-left" rowspan="1" colspan="1">Recv acknowledgement of #1</td>
+                <td class="text-left" rowspan="1" colspan="1">Recv acknowledgment of #1</td>
               </tr>
               <tr>
                 <td class="text-left" rowspan="1" colspan="1">t=2</td>
@@ -2372,11 +2372,11 @@ kPersistentCongestionThreshold = 3
               </tr>
               <tr>
                 <td class="text-left" rowspan="1" colspan="1">t=12.2</td>
-                <td class="text-left" rowspan="1" colspan="1">Recv acknowledgement of #9</td>
+                <td class="text-left" rowspan="1" colspan="1">Recv acknowledgment of #9</td>
               </tr>
             </tbody>
           </table>
-<p id="section-7.6.3-5">Packets 2 through 8 are declared lost when the acknowledgement for packet 9 is
+<p id="section-7.6.3-5">Packets 2 through 8 are declared lost when the acknowledgment for packet 9 is
 received at t = 12.2.<a href="#section-7.6.3-5" class="pilcrow">¶</a></p>
 <p id="section-7.6.3-6">The congestion period is calculated as the time between the oldest and newest
 lost packets: 8 - 1 = 7.  The persistent congestion duration is: 2 * 3 = 6.
@@ -2478,7 +2478,7 @@ sending rate by dropping packets, or alter send rate by changing ECN codepoints.
 <a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-traffic-analysis" class="section-name selfRef">Traffic Analysis</a>
         </h3>
 <p id="section-8.2-1">Packets that carry only ACK frames can be heuristically identified by observing
-packet size.  Acknowledgement patterns may expose information about link
+packet size.  Acknowledgment patterns may expose information about link
 characteristics or application behavior.  To reduce leaked information,
 endpoints can bundle acknowledgments with other frames, or they can use PADDING
 frames at a potential cost to performance.<a href="#section-8.2-1" class="pilcrow">¶</a></p>
@@ -2663,7 +2663,7 @@ packet_number:  </dt>
 ack_eliciting:  </dt>
             <dd style="margin-left: 1.5em" id="section-a.1.1-1.4">
               <p id="section-a.1.1-1.4.1">A boolean that indicates whether a packet is ack-eliciting.
-If true, it is expected that an acknowledgement will be received,
+If true, it is expected that an acknowledgment will be received,
 though the peer could delay sending the ACK frame containing it
 by up to the max_ack_delay.<a href="#section-a.1.1-1.4.1" class="pilcrow">¶</a></p>
 </dd>
@@ -2980,7 +2980,7 @@ UpdateRtt(ack_delay):
   min_rtt = min(min_rtt, latest_rtt)
   // Limit ack_delay by max_ack_delay after handshake
   // confirmation. Note that ack_delay is 0 for
-  // acknowledgements of Initial and Handshake packets.
+  // acknowledgments of Initial and Handshake packets.
   if (handshake confirmed):
     ack_delay = min(ack_delay, max_ack_delay)
 
@@ -3339,10 +3339,10 @@ OnPacketSentCC(sent_bytes):
 </div>
 </section>
 </div>
-<div id="on-packet-acknowledgement">
+<div id="on-packet-acknowledgment">
 <section id="section-b.5">
-        <h2 id="name-on-packet-acknowledgement">
-<a href="#section-b.5" class="section-number selfRef">B.5. </a><a href="#name-on-packet-acknowledgement" class="section-name selfRef">On Packet Acknowledgement</a>
+        <h2 id="name-on-packet-acknowledgment">
+<a href="#section-b.5" class="section-number selfRef">B.5. </a><a href="#name-on-packet-acknowledgment" class="section-name selfRef">On Packet Acknowledgment</a>
         </h2>
 <p id="section-b.5-1">Invoked from loss detection's OnAckReceived and is supplied with the
 newly acked_packets from sent_packets.<a href="#section-b.5-1" class="pilcrow">¶</a></p>
@@ -3488,8 +3488,8 @@ RemoveFromBytesInFlight(discarded_packets):
       <h2 id="name-change-log">
 <a href="#section-appendix.c" class="section-number selfRef">Appendix C. </a><a href="#name-change-log" class="section-name selfRef">Change Log</a>
       </h2>
-<ul class="ulEmpty normal">
-<li class="ulEmpty normal" id="section-appendix.c-1.1">
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-appendix.c-1.1">
           <strong>RFC Editor's Note:</strong>  Please remove this section prior to
 publication of a final version of this document.<a href="#section-appendix.c-1.1" class="pilcrow">¶</a>
 </li>

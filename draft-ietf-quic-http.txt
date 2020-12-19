@@ -184,7 +184,7 @@ Table of Contents
      B.32. Since draft-ietf-quic-http-01
      B.33. Since draft-ietf-quic-http-00
      B.34. Since draft-shade-quic-http2-mapping-00
-   Acknowledgements
+   Acknowledgments
    Author's Address
 
 1.  Introduction
@@ -2875,7 +2875,7 @@ A.4.  HTTP/2 Error Codes
    FLOW_CONTROL_ERROR (0x3):  Not applicable, since QUIC handles flow
       control.
 
-   SETTINGS_TIMEOUT (0x4):  Not applicable, since no acknowledgement of
+   SETTINGS_TIMEOUT (0x4):  Not applicable, since no acknowledgment of
       SETTINGS is defined.
 
    STREAM_CLOSED (0x5):  Not applicable, since QUIC handles stream
@@ -3335,7 +3335,7 @@ B.34.  Since draft-shade-quic-http2-mapping-00
 
    *  Updated authors/editors list
 
-Acknowledgements
+Acknowledgments
 
    The original authors of this specification were Robbie Shade and Mike
    Warres.
