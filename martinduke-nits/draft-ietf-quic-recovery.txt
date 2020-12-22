@@ -1366,9 +1366,9 @@ Table of Contents
 
    [RACK]     Cheng, Y., Cardwell, N., Dukkipati, N., and P. Jha, "The
               RACK-TLP loss detection algorithm for TCP", Work in
-              Progress, Internet-Draft, draft-ietf-tcpm-rack-14, 2
+              Progress, Internet-Draft, draft-ietf-tcpm-rack-15, 22
               December 2020, <http://www.ietf.org/internet-drafts/draft-
-              ietf-tcpm-rack-14.txt>.
+              ietf-tcpm-rack-15.txt>.
 
    [RETRANSMISSION]
               Karn, P. and C. Partridge, "Improving Round-Trip Time
