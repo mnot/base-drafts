@@ -996,8 +996,8 @@ Table of Contents
    *  Version Negotiation packets have no cryptographic protection.
 
    *  Retry packets use AEAD_AES_128_GCM to provide protection against
-      accidental modification or insertion by off-path adversaries; see
-      Section 5.8.
+      accidental modification and to limit the entities that can produce
+      a valid Retry; see Section 5.8.
 
    *  Initial packets use AEAD_AES_128_GCM with keys derived from the
       Destination Connection ID field of the first Initial packet sent
@@ -1491,8 +1491,8 @@ Table of Contents
    Retry packets (see the Retry Packet section of [QUIC-TRANSPORT])
    carry a Retry Integrity Tag that provides two properties: it allows
    discarding packets that have accidentally been corrupted by the
-   network, and it diminishes off-path attackers' ability to send valid
-   Retry packets.
+   network; and only an entity that receives an Initial packet is able
+   to send a valid Retry packet.
 
    The Retry Integrity Tag is a 128-bit field that is computed as the
    output of AEAD_AES_128_GCM ([AEAD]) used with the following inputs:
@@ -1541,8 +1541,8 @@ Table of Contents
       Connection ID contains the value of the Destination Connection ID
       from the Initial packet that this Retry is in response to.  The
       length of this field is given in ODCID Length.  The presence of
-      this field mitigates an off-path attacker's ability to inject a
-      Retry packet.
+      this field ensures that a valid Retry packet can only be sent by
+      an entity that receives the Initial packet.
 
 6.  Key Update
 
