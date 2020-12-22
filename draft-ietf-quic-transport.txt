@@ -5,8 +5,8 @@
 QUIC                                                     J. Iyengar, Ed.
 Internet-Draft                                                    Fastly
 Intended status: Standards Track                         M. Thomson, Ed.
-Expires: 23 June 2021                                            Mozilla
-                                                        20 December 2020
+Expires: 25 June 2021                                            Mozilla
+                                                        22 December 2020
 
 
            QUIC: A UDP-Based Multiplexed and Secure Transport
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 June 2021.
+   This Internet-Draft will expire on 25 June 2021.
 
 Copyright Notice
 
@@ -789,7 +789,7 @@ Table of Contents
    flow control limits set by its peer, and continues to accept and
    process MAX_STREAM_DATA frames.  An endpoint in the "Send" state
    generates STREAM_DATA_BLOCKED frames if it is blocked from sending by
-   stream or connection flow control limits Section 4.1.
+   stream flow control limits Section 4.1.
 
    After the application indicates that all stream data has been sent
    and a STREAM frame containing the FIN bit is sent, the sending part
@@ -2352,8 +2352,8 @@ Table of Contents
    some control over how subsequent packets are routed.  This can be
    used to direct connections to a different server instance.
 
-   If a server receives a client Initial that can be unprotected but
-   contains an invalid Retry token, it knows the client will not accept
+   If a server receives a client Initial that contains an invalid Retry
+   token but is otherwise valid, it knows the client will not accept
    another Retry token.  The server can discard such a packet and allow
    the client to time out to detect handshake failure, but that could
    impose a significant latency penalty on the client.  Instead, the
@@ -4417,7 +4417,7 @@ Table of Contents
       lost or when the limit is updated, with care taken to prevent the
       frame from being sent too often.  An endpoint SHOULD stop sending
       MAX_STREAM_DATA frames when the receiving part of the stream
-      enters a "Size Known" state.
+      enters a "Size Known" or "Reset Recvd" state.
 
    *  The limit on streams of a given type is sent in MAX_STREAMS
       frames.  Like MAX_DATA, an updated value is sent when a packet
@@ -4922,9 +4922,10 @@ Table of Contents
 
    Examples and a sample decoding algorithm are shown in Appendix A.1.
 
-   Versions (Section 15) and packet numbers sent in the header
-   (Section 17.1) are described using integers, but do not use this
-   encoding.
+   Versions (Section 15), packet numbers sent in the header
+   (Section 17.1), and the length of connection IDs in long header
+   packets (Section 17.2) are described using integers, but do not use
+   this encoding.
 
 17.  Packet Formats
 
@@ -5242,11 +5243,12 @@ Table of Contents
    message.  The first CRYPTO frame sent always begins at an offset of
    0; see Section 7.
 
-   Note that if the server sends a HelloRetryRequest, the client will
-   send another series of Initial packets.  These Initial packets will
-   continue the cryptographic handshake and will contain CRYPTO frames
-   starting at an offset matching the size of the CRYPTO frames sent in
-   the first flight of Initial packets.
+   Note that if the server sends a TLS HelloRetryRequest (see
+   Section 4.7 of [QUIC-TLS]), the client will send another series of
+   Initial packets.  These Initial packets will continue the
+   cryptographic handshake and will contain CRYPTO frames starting at an
+   offset matching the size of the CRYPTO frames sent in the first
+   flight of Initial packets.
 
 17.2.2.1.  Abandoning Initial Packets
 
@@ -5465,12 +5467,13 @@ Table of Contents
    restrictions as the first Initial packet.  A client MUST use the same
    cryptographic handshake message it included in this packet.  A server
    MAY treat a packet that contains a different cryptographic handshake
-   message as a connection error or discard it.
+   message as a connection error or discard it.  Note that including a
+   Token field reduces the available space for the cryptographic
+   handshake message, which might result in the client needing to send
+   multiple Initial packets.
 
    A client MAY attempt 0-RTT after receiving a Retry packet by sending
-   0-RTT packets to the connection ID provided by the server.  A client
-   MUST NOT change the cryptographic handshake message it sends in
-   response to receiving a Retry.
+   0-RTT packets to the connection ID provided by the server.
 
    A client MUST NOT reset the packet number for any packet number space
    after processing a Retry packet.  In particular, 0-RTT packets
@@ -8069,12 +8072,12 @@ Table of Contents
    [QUIC-RECOVERY]
               Iyengar, J., Ed. and I. Swett, Ed., "QUIC Loss Detection
               and Congestion Control", Work in Progress, Internet-Draft,
-              draft-ietf-quic-recovery, 20 December 2020,
+              draft-ietf-quic-recovery, 22 December 2020,
               <https://tools.ietf.org/html/draft-ietf-quic-recovery>.
 
    [QUIC-TLS] Thomson, M., Ed. and S. Turner, Ed., "Using Transport
               Layer Security (TLS) to Secure QUIC", Work in Progress,
-              Internet-Draft, draft-ietf-quic-tls, 20 December 2020,
+              Internet-Draft, draft-ietf-quic-tls, 22 December 2020,
               <https://tools.ietf.org/html/draft-ietf-quic-tls>.
 
    [RFC1191]  Mogul, J. and S. Deering, "Path MTU discovery", RFC 1191,
@@ -8190,7 +8193,7 @@ Table of Contents
    [QUIC-INVARIANTS]
               Thomson, M., "Version-Independent Properties of QUIC",
               Work in Progress, Internet-Draft, draft-ietf-quic-
-              invariants, 20 December 2020,
+              invariants, 22 December 2020,
               <https://tools.ietf.org/html/draft-ietf-quic-invariants>.
 
    [QUIC-MANAGEABILITY]
